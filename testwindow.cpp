@@ -4,19 +4,38 @@
 
 int main(int argc, char* args[]) {
     // Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0) { //if values is less than 0 then initialization has failed
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        return 1; //returning here make the program exitt
+        return 1;
     }
 
     // Create a window
-    SDL_Window* window = SDL_CreateWindow("sample game screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
-    if (window == NULL) { //if the creating of a window fails then program is exitted by returninf 1
+    SDL_Window* window = SDL_CreateWindow("Sample Game Screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    if (window == NULL) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return 1;
     }
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0); //renderer is used for graphics on the window
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    // Initialize SDL_image
+    if (IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG) {
+        printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+    // Load a PNG image
+    SDL_Surface* imageSurface = IMG_Load("C:\\Users\\MAUSTAFA\\OneDrive - Habib University\\sem 3\\oop\\oop project\\OOP-project\\main_window.png");
+    if (imageSurface == NULL) {
+        printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+    // Create a texture from the image surface
+    SDL_Texture* imageTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
+
+    // Free the surface since we have the texture now
+    SDL_FreeSurface(imageSurface);
 
     // Main loop flag
     bool quit = false;
@@ -26,7 +45,7 @@ int main(int argc, char* args[]) {
 
     // Main loop
     while (!quit) {
-        // Handle events on queue
+        // Handle events on the queue
         while (SDL_PollEvent(&e) != 0) {
             // User requests quit
             if (e.type == SDL_QUIT) {
@@ -35,17 +54,24 @@ int main(int argc, char* args[]) {
         }
 
         // Clear the screen (black)
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //sets the color of the screen to black
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderClear(renderer);
+
+        // Render the texture
+        SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
 
         // Present the renderer
         SDL_RenderPresent(renderer);
     }
 
+    // Destroy texture
+    SDL_DestroyTexture(imageTexture);
+
     // Destroy window
     SDL_DestroyWindow(window);
 
     // Quit SDL subsystems
+    IMG_Quit();
     SDL_Quit();
 
     return 0;
