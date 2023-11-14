@@ -1,4 +1,4 @@
-OOP Project Proposal Group 2:
+OOP Project Proposal Group 2
 
 Group members:
 
