@@ -25,7 +25,7 @@ int main(int argc, char* args[]) {
     }
 
     // Loading the start screen PNG image
-    SDL_Surface* imageSurface = IMG_Load("C:\\Users\\MAUSTAFA\\OneDrive - Habib University\\sem 3\\oop\\oop project\\OOP-project\\main_window.png");
+    SDL_Surface* imageSurface = IMG_Load("main_window.png");
     if (imageSurface == NULL) {
         printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
         return 1;
