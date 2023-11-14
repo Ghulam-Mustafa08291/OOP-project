@@ -3,13 +3,13 @@
 #include <SDL_image.h>
 
 int main(int argc, char* args[]) {
-    // Initialize SDL
+    // Initializing SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-        return 1;
+        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
+        return 1; //returning for stopping
     }
 
-    // Create a window
+    // Creating  a window
     SDL_Window* window = SDL_CreateWindow("Sample Game Screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     if (window == NULL) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -24,14 +24,14 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
-    // Load a PNG image
+    // Loading the start screen PNG image
     SDL_Surface* imageSurface = IMG_Load("C:\\Users\\MAUSTAFA\\OneDrive - Habib University\\sem 3\\oop\\oop project\\OOP-project\\main_window.png");
     if (imageSurface == NULL) {
         printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
         return 1;
     }
 
-    // Create a texture from the image surface
+    // Creating a texture from the image surface
     SDL_Texture* imageTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
 
     // Free the surface since we have the texture now
@@ -43,7 +43,7 @@ int main(int argc, char* args[]) {
     // Event handler for handling events
     SDL_Event e;
 
-    // Main loop
+    //our main loop
     while (!quit) {
         // Handle events on the queue
         while (SDL_PollEvent(&e) != 0) {
@@ -54,7 +54,7 @@ int main(int argc, char* args[]) {
         }
 
         // Clear the screen (black)
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //gives black color initially
         SDL_RenderClear(renderer);
 
         // Render the texture
