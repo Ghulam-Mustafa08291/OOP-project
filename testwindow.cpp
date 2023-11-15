@@ -1,9 +1,12 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "player.hpp"
 
 int main(int argc, char* args[]) {
     // Initializing SDL
+
+    Player player={};
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
         return 1; //returning for stopping
@@ -51,6 +54,18 @@ int main(int argc, char* args[]) {
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
+            else if (e.type == SDL_KEYDOWN) {
+                switch (e.key.keysym.sym) {
+                    case SDLK_UP:
+                    case SDLK_DOWN:
+                    case SDLK_LEFT:
+                    case SDLK_RIGHT:
+                        // Call move() function for player movement
+                        player.move(e); // Assuming 'player' is an instance of your Player class
+                        break;
+                    // Handle other key events if needed
+                }
+        }
         }
 
         // Clear the screen (black)

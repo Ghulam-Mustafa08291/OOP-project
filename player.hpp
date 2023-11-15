@@ -43,9 +43,11 @@ class Player{
         Player(int h, int a, int g, int mb, int ar, float s, int x, int y,
 char* ew, char* ea){};
         ~Player(){};
+        void move(SDL_Event& event){};
 
         
     };
+
 
 
 
