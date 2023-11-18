@@ -6,7 +6,12 @@
 int main(int argc, char* args[]) {
     // Initializing SDL
 
-    Player player={};
+    Player player;
+
+    
+
+
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
         return 1; //returning for stopping
@@ -37,8 +42,32 @@ int main(int argc, char* args[]) {
     // Creating a texture from the image surface
     SDL_Texture* imageTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
 
+
+
+
+
     // Free the surface since we have the texture now
     SDL_FreeSurface(imageSurface);
+
+
+
+      SDL_Surface* playerSurface = IMG_Load("temp_player.png");
+      std::cout<<"hello player"<<std::endl;
+    if (playerSurface == NULL) {
+        printf("Unable to load player image! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+        // Create a texture from the player image surface
+    SDL_Texture* playerTexture = SDL_CreateTextureFromSurface(renderer, playerSurface);
+    SDL_FreeSurface(playerSurface); // Free the surface as the texture is created
+
+
+
+
+
+
+
 
     // Main loop flag
     bool quit = false;
@@ -72,6 +101,10 @@ int main(int argc, char* args[]) {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //gives black color initially
         SDL_RenderClear(renderer);
 
+
+        SDL_Rect playerRect = {32,32,64,64 };
+        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
+
         // Render the texture
         SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
 
@@ -81,6 +114,8 @@ int main(int argc, char* args[]) {
 
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
+
+    SDL_DestroyTexture(playerTexture);
 
     // Destroy window
     SDL_DestroyWindow(window);

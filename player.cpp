@@ -14,8 +14,7 @@ Player::Player(){
     this->equippedWeapon="deezFists";
     this->equippedArmour="clothesheheh";
 }
-Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y,
-char* ew, char* ea){
+Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char* ew, char* ea){
     this->health = h;
     this->attack = a;
     this->gold = g;
@@ -28,7 +27,9 @@ char* ew, char* ea){
     this->equippedArmour = ea;
     }
 
-Player::~Player(){}
+Player::~Player(){
+    std::cout<<"Goodbye Player!"<<std::endl;
+}
 void Player::setHealth(int h) {this->health = h;}
 void Player::setAttack(int a) {this->attack = a;}
 void Player::setGold(int g) {this->gold = g;}   

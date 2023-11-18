@@ -16,8 +16,8 @@ class Plants{
         void setCost(int c);
         int getHealth();
         int getCost();
-        Plants(){};
-        ~Plants(){};
+        Plants();
+        ~Plants();
 };
 
 
