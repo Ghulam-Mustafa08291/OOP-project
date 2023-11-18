@@ -69,49 +69,41 @@ int main(int argc, char* args[]) {
 
 
 
-    // Main loop flag
-    bool quit = false;
+   // Main loop flag
+bool quit = false;
 
-    // Event handler for handling events
-    SDL_Event e;
+// Event handler for handling events
+SDL_Event e;
 
-    //our main loop
-    while (!quit) {
-        // Handle events on the queue
-        while (SDL_PollEvent(&e) != 0) {
-            // User requests quit
-            if (e.type == SDL_QUIT) {
-                quit = true;
-            }
-            else if (e.type == SDL_KEYDOWN) {
-                switch (e.key.keysym.sym) {
-                    case SDLK_UP:
-                    case SDLK_DOWN:
-                    case SDLK_LEFT:
-                    case SDLK_RIGHT:
-                        // Call move() function for player movement
-                        player.move(e); // Assuming 'player' is an instance of your Player class
-                        break;
-                    // Handle other key events if needed
-                }
+// Main loop
+while (!quit) {
+    // Handle events on the queue
+    while (SDL_PollEvent(&e) != 0) {
+        // User requests quit
+        if (e.type == SDL_QUIT) {
+            quit = true;
         }
+        else if (e.type == SDL_KEYDOWN) {
+            // Call move() function for player movement
+            player.move(e); // Pass the event to the player's move function
         }
-
-        // Clear the screen (black)
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //gives black color initially
-        SDL_RenderClear(renderer);
-
-
-        SDL_Rect playerRect = {32,32,64,64 };
-        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
-
-        // Render the texture
-        SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
-
-        // Present the renderer
-        SDL_RenderPresent(renderer);
+        // Handle other types of events here if needed
     }
 
+    // Clear the screen (black)
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    // Render the texture (background)
+    SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
+
+    // Render the player texture at the updated position adfter the move function is called
+    SDL_Rect playerRect = player.getPosition();
+    SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
+
+    // Present the renderer
+    SDL_RenderPresent(renderer);
+}
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
 

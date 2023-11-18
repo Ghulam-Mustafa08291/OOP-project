@@ -11,6 +11,8 @@ Player::Player(){
     this->speed=1;
     this->position.x=300;
     this->position.y=400;
+    this->position.h=128;
+    this->position.w=128;
     this->equippedWeapon="deezFists";
     this->equippedArmour="clothesheheh";
 }
@@ -23,6 +25,8 @@ Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char*
     this->speed = s;
     this->position.x = x;
     this->position.y = y;
+    this->position.h=128;
+    this->position.w=128;
     this->equippedWeapon = ew;
     this->equippedArmour = ea;
     }
@@ -67,28 +71,30 @@ const char* Player::getEquippedArmour(){
 
 //this is the function for movement
 void Player::move(SDL_Event& event) {
-    // Handle events to move the player
-    while (SDL_PollEvent(&event) != 0) {
-        switch (event.type) {
-            case SDL_KEYDOWN:
-                // Check the key pressed
-                switch (event.key.keysym.sym) {
-                    case SDLK_UP:
-                        position.y += 5; // Move player up (reduce Y coordinate)
-                        break;
-                    case SDLK_DOWN:
-                        position.y -= 5; // Move player down (increase Y coordinate)
-                        break;
-                    case SDLK_LEFT:
-                        position.x -= 5; // Move player left (reduce X coordinate)
-                        break;
-                    case SDLK_RIGHT:
-                        position.x += 5; // Move player right (increase X coordinate)
-                        break;
-                    // Add more cases for other keys if needed
-                }
-                break;
-            // Add more cases for other events if needed
-        }
+    switch (event.type) {
+        case SDL_KEYDOWN:
+            // Check the key pressed
+            switch (event.key.keysym.sym) {
+                case SDLK_UP:
+                    position.y -= 5; // Move player up (reduce Y coordinate)
+                    std::cout << "moving player up" << std::endl;
+                    break;
+                case SDLK_DOWN:
+                    position.y += 5; // Move player down (increase Y coordinate)
+                    std::cout << "moving player down" << std::endl;
+                    break;
+                case SDLK_LEFT:
+                    position.x -= 5; // Move player left (reduce X coordinate)
+                    std::cout << "moving player left" << std::endl;
+                    break;
+                case SDLK_RIGHT:
+                    position.x += 5; // Move player right (increase X coordinate)
+                    std::cout << "moving player right" << std::endl;
+                    break;
+                // Add more cases for other keys if needed
+            }
+            break;
+        // Add more cases for other events if needed
     }
 }
+
