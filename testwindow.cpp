@@ -24,6 +24,7 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
+
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     // Initialize SDL_image

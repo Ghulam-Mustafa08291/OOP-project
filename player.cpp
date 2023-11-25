@@ -71,25 +71,43 @@ const char* Player::getEquippedArmour(){
 
 //this is the function for movement
 void Player::move(SDL_Event& event) {
+    const int SCREEN_WIDTH = 800;
+    const int SCREEN_HEIGHT = 600; 
     switch (event.type) {
         case SDL_KEYDOWN:
+            // Get current player position
+            int currentX = position.x;
+            int currentY = position.y;
+
             // Check the key pressed
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
-                    position.y -= 5; // Move player up (reduce Y coordinate)
-                    std::cout << "moving player up" << std::endl;
+                    // Move player up (reduce Y coordinate) if within screen bounds
+                    if (currentY - 5 >= 0) {
+                        position.y -= 5;
+                        std::cout << "moving player up" << std::endl;
+                    }
                     break;
                 case SDLK_DOWN:
-                    position.y += 5; // Move player down (increase Y coordinate)
-                    std::cout << "moving player down" << std::endl;
+                    // Move player down (increase Y coordinate) if within screen bounds
+                    if (currentY + position.h + 5 <= SCREEN_HEIGHT) {
+                        position.y += 5;
+                        std::cout << "moving player down" << std::endl;
+                    }
                     break;
                 case SDLK_LEFT:
-                    position.x -= 5; // Move player left (reduce X coordinate)
-                    std::cout << "moving player left" << std::endl;
+                    // Move player left (reduce X coordinate) if within screen bounds
+                    if (currentX - 5 >= 0) {
+                        position.x -= 5;
+                        std::cout << "moving player left" << std::endl;
+                    }
                     break;
                 case SDLK_RIGHT:
-                    position.x += 5; // Move player right (increase X coordinate)
-                    std::cout << "moving player right" << std::endl;
+                    // Move player right (increase X coordinate) if within screen bounds
+                    if (currentX + position.w + 5 <= SCREEN_WIDTH) {
+                        position.x += 5;
+                        std::cout << "moving player right" << std::endl;
+                    }
                     break;
                 // Add more cases for other keys if needed
             }
