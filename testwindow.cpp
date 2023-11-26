@@ -35,20 +35,27 @@ int main(int argc, char* args[]) {
 
     // Loading the start screen PNG image
     SDL_Surface* imageSurface = IMG_Load("main_window.png");
+    SDL_Surface* maze1 = IMG_Load("map1.png");
     if (imageSurface == NULL) {
+        printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+    if (maze1 == NULL) {
         printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
         return 1;
     }
 
     // Creating a texture from the image surface
     SDL_Texture* imageTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
-
+    SDL_Texture* map1Texture = SDL_CreateTextureFromSurface(renderer, maze1);
 
 
 
 
     // Free the surface since we have the texture now
     SDL_FreeSurface(imageSurface);
+    SDL_FreeSurface(maze1);
 
 
 
@@ -73,6 +80,8 @@ int main(int argc, char* args[]) {
    // Main loop flag
 bool quit = false;
 
+bool startGame = false; // Flag to control the game start
+
 // Event handler for handling events
 SDL_Event e;
 
@@ -84,11 +93,9 @@ while (!quit) {
         if (e.type == SDL_QUIT) {
             quit = true;
         }
-        else if (e.type == SDL_KEYDOWN) {
-            // Call move() function for player movement
-            player.move(e); // Pass the event to the player's move function
+        if (e.key.keysym.sym == SDLK_SPACE) { // Assuming space key starts the game
+                startGame = true; // Set the flag to start the game
         }
-        // Handle other types of events here if needed
     }
 
     // Clear the screen (black)
@@ -99,11 +106,50 @@ while (!quit) {
     SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
 
     // Render the player texture at the updated position adfter the move function is called
-    SDL_Rect playerRect = player.getPosition();
-    SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
+    if (startGame) {
+        int newX = player.getPosition().x;
+        int newY = player.getPosition().y;
 
-    // Present the renderer
+        if (e.type == SDL_KEYDOWN) {
+            switch (e.key.keysym.sym) {
+                case SDLK_UP:
+                    newY -= player.getSpeed(); // Move up
+                    break;
+                case SDLK_DOWN:
+                    newY += player.getSpeed(); // Move down
+                    break;
+                case SDLK_LEFT:
+                    newX -= player.getSpeed(); // Move left
+                    break;
+                case SDLK_RIGHT:
+                    newX += player.getSpeed(); // Move right
+                    break;
+                default:
+                    break;
+            }
+
+            // Check collision with maze
+            int gridX = newX / TILE_SIZE; // TILE_SIZE is the size of each grid cell
+            int gridY = newY / TILE_SIZE;
+
+            // Ensure within bounds
+            if (gridX >= 0 && gridX < MAZE_WIDTH && gridY >= 0 && gridY < MAZE_HEIGHT) {
+                if (maze[gridY][gridX] == 0) { // Check if it's a valid path (0)
+                    player.setPosition(newX, newY); // Update player position
+                }
+                // else, it's a collision, don't update the position
+            }
+        }
+    }
+
+
     SDL_RenderPresent(renderer);
+
+    // SDL_Rect playerRect = player.getPosition();
+    // SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
+
+    // // Present the renderer
+    // SDL_RenderPresent(renderer);
 }
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
