@@ -96,11 +96,6 @@ while (!quit) {
         if (e.key.keysym.sym == SDLK_SPACE) { // Assuming space key starts the game
                 startGame = true; // Set the flag to start the game
         }
-        else if (e.type == SDL_KEYDOWN) {
-            // Call move() function for player movement
-            player.move(e); // Pass the event to the player's move function
-        }
-        // Handle other types of events here if needed
     }
 
     // Clear the screen (black)
@@ -112,12 +107,41 @@ while (!quit) {
 
     // Render the player texture at the updated position adfter the move function is called
     if (startGame) {
-        player.move(e); // Assuming the player continuously moves once the game starts
-        SDL_RenderCopy(renderer, map1Texture, NULL, NULL);
+        int newX = player.getPosition().x;
+        int newY = player.getPosition().y;
 
-        SDL_Rect playerRect = player.getPosition();
-        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
+        if (e.type == SDL_KEYDOWN) {
+            switch (e.key.keysym.sym) {
+                case SDLK_UP:
+                    newY -= player.getSpeed(); // Move up
+                    break;
+                case SDLK_DOWN:
+                    newY += player.getSpeed(); // Move down
+                    break;
+                case SDLK_LEFT:
+                    newX -= player.getSpeed(); // Move left
+                    break;
+                case SDLK_RIGHT:
+                    newX += player.getSpeed(); // Move right
+                    break;
+                default:
+                    break;
+            }
+
+            // Check collision with maze
+            int gridX = newX / TILE_SIZE; // TILE_SIZE is the size of each grid cell
+            int gridY = newY / TILE_SIZE;
+
+            // Ensure within bounds
+            if (gridX >= 0 && gridX < MAZE_WIDTH && gridY >= 0 && gridY < MAZE_HEIGHT) {
+                if (maze[gridY][gridX] == 0) { // Check if it's a valid path (0)
+                    player.setPosition(newX, newY); // Update player position
+                }
+                // else, it's a collision, don't update the position
+            }
+        }
     }
+
 
     SDL_RenderPresent(renderer);
 
