@@ -35,20 +35,27 @@ int main(int argc, char* args[]) {
 
     // Loading the start screen PNG image
     SDL_Surface* imageSurface = IMG_Load("main_window.png");
+    SDL_Surface* maze1 = IMG_Load("map1.png");
     if (imageSurface == NULL) {
+        printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+    if (maze1 == NULL) {
         printf("Unable to load image! SDL_image Error: %s\n", IMG_GetError());
         return 1;
     }
 
     // Creating a texture from the image surface
     SDL_Texture* imageTexture = SDL_CreateTextureFromSurface(renderer, imageSurface);
-
+    SDL_Texture* map1Texture = SDL_CreateTextureFromSurface(renderer, maze1);
 
 
 
 
     // Free the surface since we have the texture now
     SDL_FreeSurface(imageSurface);
+    SDL_FreeSurface(maze1);
 
 
 
@@ -73,6 +80,8 @@ int main(int argc, char* args[]) {
    // Main loop flag
 bool quit = false;
 
+bool startGame = false; // Flag to control the game start
+
 // Event handler for handling events
 SDL_Event e;
 
@@ -84,6 +93,14 @@ while (!quit) {
         if (e.type == SDL_QUIT) {
             quit = true;
         }
+        if (e.key.keysym.sym == SDLK_SPACE) { // Assuming space key starts the game
+                startGame = true; // Set the flag to start the game
+        }
+        else if (e.type == SDL_KEYDOWN) {
+            // Call move() function for player movement
+            player.move(e); // Pass the event to the player's move function
+        }
+        // Handle other types of events here if needed
     }
 
     // Clear the screen (black)
@@ -102,8 +119,13 @@ while (!quit) {
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
     }
 
-    // Present the renderer
     SDL_RenderPresent(renderer);
+
+    // SDL_Rect playerRect = player.getPosition();
+    // SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
+
+    // // Present the renderer
+    // SDL_RenderPresent(renderer);
 }
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
