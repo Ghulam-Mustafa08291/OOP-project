@@ -71,8 +71,8 @@ const char* Player::getEquippedArmour(){
 
 //this is the function for movement
 void Player::move(SDL_Event& event) {
-    const int SCREEN_WIDTH = 800;
-    const int SCREEN_HEIGHT = 600; 
+    const int SCREEN_WIDTH = 1280;
+    const int SCREEN_HEIGHT = 720; 
     switch (event.type) {
         case SDL_KEYDOWN:
             // Get current player position
@@ -83,29 +83,29 @@ void Player::move(SDL_Event& event) {
             switch (event.key.keysym.sym) {
                 case SDLK_UP:
                     // Move player up (reduce Y coordinate) if within screen bounds
-                    if (currentY - 5 >= 0) {
-                        position.y -= 5;
+                    if (currentY - 20 >= 0) {
+                        position.y -= 20;
                         std::cout << "moving player up" << std::endl;
                     }
                     break;
                 case SDLK_DOWN:
                     // Move player down (increase Y coordinate) if within screen bounds
-                    if (currentY + position.h + 5 <= SCREEN_HEIGHT) {
-                        position.y += 5;
+                    if (currentY + position.h + 20 <= SCREEN_HEIGHT) {
+                        position.y += 20;
                         std::cout << "moving player down" << std::endl;
                     }
                     break;
                 case SDLK_LEFT:
                     // Move player left (reduce X coordinate) if within screen bounds
-                    if (currentX - 5 >= 0) {
-                        position.x -= 5;
+                    if (currentX - 20 >= 0) {
+                        position.x -= 20;
                         std::cout << "moving player left" << std::endl;
                     }
                     break;
                 case SDLK_RIGHT:
                     // Move player right (increase X coordinate) if within screen bounds
-                    if (currentX + position.w + 5 <= SCREEN_WIDTH) {
-                        position.x += 5;
+                    if (currentX + position.w + 20 <= SCREEN_WIDTH) {
+                        position.x += 20;
                         std::cout << "moving player right" << std::endl;
                     }
                     break;

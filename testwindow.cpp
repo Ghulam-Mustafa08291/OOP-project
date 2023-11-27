@@ -18,7 +18,7 @@ int main(int argc, char* args[]) {
     }
 
     // Creating  a window
-    SDL_Window* window = SDL_CreateWindow("Sample Game Screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Sample Game Screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
     if (window == NULL) {
         printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return 1;
@@ -85,6 +85,23 @@ bool startGame = false; // Flag to control the game start
 // Event handler for handling events
 SDL_Event e;
 
+int grid[64][36];
+
+for (int i = 0; i < 64; i++) {
+    for (int j = 0; j < 36; j++) {
+        if (i == 0 || i == 63 || j == 0 || j == 35) {
+            grid[i][j] = 1;
+            std::cout << "1";
+        }
+        else {
+            grid[i][j] = 0; 
+            std::cout << "0";
+        }
+    }
+    std::cout << std::endl;
+}
+
+
 // Main loop
 while (!quit) {
     // Handle events on the queue
@@ -109,6 +126,21 @@ while (!quit) {
 
     // Render the texture (background)
     SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
+
+    for (int i = 0; i < 64; ++i) {
+        for (int j = 0; j < 36; ++j) {
+            // Define rectangle positions based on grid position and block size
+            SDL_Rect blockRect = { i * 20, j * 20, 20, 20 }; // Adjust block size as needed
+
+            // Render grey block for value 1 and brown block for value 0
+            if (grid[i][j] == 1) {
+                SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255); // Grey color
+            } else {
+                SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
+            }
+            SDL_RenderFillRect(renderer, &blockRect);
+        }
+    }
 
     // Render the player texture at the updated position adfter the move function is called
     if (startGame) {
