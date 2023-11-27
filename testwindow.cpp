@@ -129,16 +129,16 @@ while (!quit) {
             }
 
             // Check collision with maze
-            int gridX = newX / TILE_SIZE; // TILE_SIZE is the size of each grid cell
-            int gridY = newY / TILE_SIZE;
+            // int gridX = newX / TILE_SIZE; // TILE_SIZE is the size of each grid cell
+            // int gridY = newY / TILE_SIZE;
 
             // Ensure within bounds
-            if (gridX >= 0 && gridX < MAZE_WIDTH && gridY >= 0 && gridY < MAZE_HEIGHT) {
-                if (maze[gridY][gridX] == 0) { // Check if it's a valid path (0)
-                    player.setPosition(newX, newY); // Update player position
-                }
-                // else, it's a collision, don't update the position
-            }
+            // if (gridX >= 0 && gridX < MAZE_WIDTH && gridY >= 0 && gridY < MAZE_HEIGHT) {
+            //     if (maze[gridY][gridX] == 0) { // Check if it's a valid path (0)
+            //         player.setPosition(newX, newY); // Update player position
+            //     }
+            //     // else, it's a collision, don't update the position
+            // }
         }
     }
 
