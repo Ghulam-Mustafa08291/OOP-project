@@ -59,7 +59,7 @@ int main(int argc, char* args[]) {
 
 
 
-      SDL_Surface* playerSurface = IMG_Load("temp_player.png");
+      SDL_Surface* playerSurface = IMG_Load("temp_player.jpg");
       std::cout<<"hello player"<<std::endl;
     if (playerSurface == NULL) {
         printf("Unable to load player image! SDL_image Error: %s\n", IMG_GetError());
