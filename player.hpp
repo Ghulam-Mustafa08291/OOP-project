@@ -43,7 +43,7 @@ class Player{
         Player();
         Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char* ew, char* ea);
         ~Player();
-        void move(SDL_Event& event, int grid[][36]);
+        void move(SDL_Event& event);
 
         
     };

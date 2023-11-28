@@ -156,7 +156,7 @@ while (!quit) {
         }
         else if (e.type == SDL_KEYDOWN) {
             // Call move() function for player movement
-            player.move(e, grid); // Pass the event to the player's move function
+            player.move(e); // Pass the event to the player's move function
         }
         // Handle other types of events here if needed
     }
@@ -172,7 +172,7 @@ while (!quit) {
 
     // Render the player texture at the updated position adfter the move function is called
     if (startGame) {
-        player.move(e, grid); // Assuming the player continuously moves once the game starts
+        player.move(e); // Assuming the player continuously moves once the game starts
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {
                 // Define rectangle positions based on grid position and block size
@@ -188,8 +188,39 @@ while (!quit) {
             }
         }
 
-        SDL_Rect playerRect = player.getPosition();
-        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
+        bool collision = false;
+
+        for (int i = 0; i < 64; ++i) {
+            for (int j = 0; j < 36; ++j) {
+                // Check collision only for grid elements with value 1
+                if (grid[i][j] == 1) {
+                    SDL_Rect blockRect = { i * 20, j * 20, 20, 20 }; // Adjust block size as needed
+
+                    // Define a rectangle for the player's position
+                    SDL_Rect playerRect = player.getPosition();
+
+                    // Check collision between player and block
+                    if (playerRect.x < blockRect.x + blockRect.w &&
+                        playerRect.x + playerRect.w > blockRect.x &&
+                        playerRect.y < blockRect.y + blockRect.h &&
+                        playerRect.y + playerRect.h > blockRect.y) {
+                        // Collision detected
+                        collision = true;
+                        break; // Break out of the inner loop as collision detected
+                    }
+                }
+            }
+            if (collision) {
+                break; // Break out of the outer loop if collision detected
+            }
+        }
+
+        if (!collision) {
+            // If no collision detected, render the player at the updated position
+            SDL_Rect playerRect = player.getPosition();
+            SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
+        }
+
     }
 
     SDL_RenderPresent(renderer);
