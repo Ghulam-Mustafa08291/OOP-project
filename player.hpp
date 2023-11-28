@@ -37,12 +37,13 @@ class Player{
         int getArmour();
         float getSpeed();
         SDL_Rect getPosition();
+        SDL_Rect getFuturePosition(SDL_Event& e);
         const char* getEquippedWeapon();
         const char* getEquippedArmour();
         Player();
         Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char* ew, char* ea);
         ~Player();
-        void move(SDL_Event& event);
+        void move(SDL_Event& event, int grid[][36]);
 
         
     };
