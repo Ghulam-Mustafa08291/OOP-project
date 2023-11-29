@@ -18,10 +18,6 @@ int main(int argc, char* args[]) {
 
     Player player;
 
-    
-
-
-
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
         return 1; //returning for stopping
@@ -173,6 +169,8 @@ int grid[64][36] =
 //     std::cout << std::endl;
 // }
 
+int time = 0;
+
 // Main loop
 while (!quit) {
     // Handle events on the queue
@@ -198,10 +196,9 @@ while (!quit) {
     // Render the texture (background)
     SDL_RenderCopy(renderer, imageTexture, NULL, NULL);
 
-    
-
     // Render the player texture at the updated position adfter the move function is called
     if (startGame) {
+        time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {
@@ -216,10 +213,21 @@ while (!quit) {
                     SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
                 }
                 else if (grid[i][j] == 2) {
-                    SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
+                    if (time % 120 == 0) {
+                        // SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
+                        grid[i+1][j] = 4;
+                    }
+                    else {
+                        SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
+                    }
                 }
                 else if (grid[i][j] == 3) {
                     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color
+                }
+                else if (grid[i][j] == 4) {
+                    grid[i+1][j] == 4;
+                    grid[i][j] == 0;
+                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
                 }
                 SDL_RenderFillRect(renderer, &blockRect);
             }
