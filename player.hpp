@@ -46,6 +46,8 @@ class Player{
         void move(SDL_Event& event, int grid[64][36]);
         void add_to_health(int inp_health);
         void add_to_attack(int inp_attack);
+        void add_to_speed(int inp_speed);
+       
 
         
     };

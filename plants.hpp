@@ -18,7 +18,7 @@ class Plants{
         int getCost();
         Plants();
         virtual ~Plants(); //keeping the destructor here virtual since this class will be the parent class for other classes
-        
+        void decrease_from_cost(int p);
 };
 
 

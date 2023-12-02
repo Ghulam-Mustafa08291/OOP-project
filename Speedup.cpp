@@ -2,9 +2,10 @@
 #include <iostream>
 
 void SpeedUp::increase_speed(Player& p)
-    {
-        std::cout<<"inreasing the players speed!"<<std::endl;
-        p.setSpeed(10);
+    {   
+        p.add_to_speed(10);
+        std::cout<<"inreasing the players speed! new Speed: "<<p.getSpeed()<<std::endl;
+        
     }
 
 SpeedUp::SpeedUp(){std::cout<<"Speedup powerup created"<<std::endl;}

@@ -17,6 +17,8 @@ int Plants::getHealth(){
     return this->health;
 }
 
+void Plants::decrease_from_cost(int s){this->cost=this->cost-5;}
+
 Plants::Plants()
 :health{100},cost{50} //assuming random values for them now
 {}
