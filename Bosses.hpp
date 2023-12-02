@@ -33,7 +33,7 @@ class Bosses{
         void trigger_phase();
 
         Bosses();
-        ~Bosses();
+        virtual ~Bosses(); //keeping it virtual cuz this is a parent class
 };
 
 
