@@ -16,6 +16,8 @@ Player::Player(){
     this->equippedWeapon="deezFists";
     this->equippedArmour="clothesheheh";
 }
+
+void Player::add_to_health(int inp_h){this->health=this->health+inp_h;}
 Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char* ew, char* ea){
     this->health = h;
     this->attack = a;

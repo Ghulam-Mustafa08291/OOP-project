@@ -44,6 +44,7 @@ class Player{
         Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char* ew, char* ea);
         ~Player();
         void move(SDL_Event& event, int grid[64][36]);
+        void add_to_health(int inp_health);
 
         
     };
