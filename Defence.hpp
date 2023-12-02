@@ -14,6 +14,8 @@ class Defence:public Plants{
         int get_hits_until_attack();
         void set_hits_until_attack(int hits);
 
+        void Deflect();
+
         Defence();
         ~Defence();
 };
