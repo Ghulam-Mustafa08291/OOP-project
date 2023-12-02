@@ -17,24 +17,8 @@ class Plants{
         int getHealth();
         int getCost();
         Plants();
-        ~Plants();
+        virtual ~Plants(); //keeping the destructor here virtual since this class will be the parent class for other classes
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endif PLANTS_HPP
+#endif // PLANTS_HPP

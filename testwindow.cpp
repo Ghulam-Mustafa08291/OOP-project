@@ -234,28 +234,28 @@ while (!quit) {
             }
         }
 
-        for (int i = 0; i < 64; i++) {
-            for (int j = 0; j < 36; j++) {
-                if (grid[i][j] == 1) {
-                    std::cout << "1";
-                }
-                else if (grid[i][j] == 0) {
-                    std::cout << "0";
-                }
-                else if (grid[i][j] == 2) {
-                    std::cout << "2";
-                }
-                else if (grid[i][j] == 3) {
-                    std::cout << "3";
-                }
-                else if (grid[i][j] == 4) {
-                    std::cout << "4";
-                }
-            }
-            std::cout << std::endl;
-        }
+        // for (int i = 0; i < 64; i++) {
+        //     for (int j = 0; j < 36; j++) {
+        //         if (grid[i][j] == 1) {
+        //             std::cout << "1";
+        //         }
+        //         else if (grid[i][j] == 0) {
+        //             std::cout << "0";
+        //         }
+        //         else if (grid[i][j] == 2) {
+        //             std::cout << "2";
+        //         }
+        //         else if (grid[i][j] == 3) {
+        //             std::cout << "3";
+        //         }
+        //         else if (grid[i][j] == 4) {
+        //             std::cout << "4";
+        //         }
+        //     }
+        //     std::cout << std::endl;
+        // }
 
-        std::cout << std::endl << std::endl << std::endl << std::endl;
+        // std::cout << std::endl << std::endl << std::endl << std::endl;
 
         SDL_Rect playerRect = player.getPosition();
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
