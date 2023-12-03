@@ -8,7 +8,7 @@
 
 //health,attack,gold,magicbeans,armour,speed,position,equipped weapon,equipped armour
 
-std::vector<Plants*> plantObjects; //will store objects pf plant and its inherited data types here
+// std::vector<Plants*> plantObjects; //will store objects pf plant and its inherited data types here
 
 class Player{
     private:

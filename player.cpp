@@ -2,6 +2,7 @@
 #include "plants.hpp"
 #include <iostream>
 #include <vector>
+std::vector<Plants*> PlantObject;
 
 //below are the setters and constructor and destructor
 Player::Player(){
