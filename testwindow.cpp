@@ -19,7 +19,7 @@ int main(int argc, char* args[]) {
     // Initializing SDL
 
     Player player;
-    std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
+    // std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 

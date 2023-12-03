@@ -1,5 +1,7 @@
 #include "player.hpp"
+#include "plants.hpp"
 #include <iostream>
+#include <vector>
 
 //below are the setters and constructor and destructor
 Player::Player(){
@@ -74,6 +76,7 @@ const char* Player::getEquippedArmour(){
 }
 
 // this function controls player movement
+
 void Player::move(SDL_Event& event, int grid[64][36]) {
     const int BLOCK_SIZE = 20; // Size of each block in the grid
 
