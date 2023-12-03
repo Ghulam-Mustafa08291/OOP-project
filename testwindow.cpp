@@ -3,6 +3,8 @@
 #include <SDL_image.h>
 #include "player.hpp"
 #include "maps.hpp"
+#include <vector>
+#include "Plants.hpp"
 
 int changeMap (int* g[64][36], int* m[64][36]) {
     for (int i = 0; i < 64; i++) {
@@ -17,6 +19,7 @@ int main(int argc, char* args[]) {
     // Initializing SDL
 
     Player player;
+    std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
@@ -223,10 +226,10 @@ while (!quit) {
                     }
                 }
                 else if (grid[i][j] == 3) {
-                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color
+                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, plant
                 }
                 else if (grid[i][j] == 4) {
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
+                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
                     grid[i+1][j] == 4;
                     grid[i][j] == 0;
                 }
