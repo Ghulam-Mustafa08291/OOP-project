@@ -40,7 +40,7 @@ class Player{
         int getMagicBeans();
         int getArmour();
         float getSpeed();
-        SDL_Rect getPosition();
+        SDL_Rect& getPosition();
         SDL_Rect getFuturePosition(SDL_Event& e);
         const char* getEquippedWeapon();
         const char* getEquippedArmour();

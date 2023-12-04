@@ -70,7 +70,7 @@ int Player::getGold() {return this->gold;}
 int Player::getMagicBeans() {return this->magicBeans;}
 int Player::getArmour() {return this->armour;}
 float Player::getSpeed() {return this->speed;}
-SDL_Rect Player::getPosition(){return this->position;}
+SDL_Rect& Player::getPosition(){return this->position;}
 const char* Player::getEquippedWeapon(){
     return this->equippedWeapon;
 }

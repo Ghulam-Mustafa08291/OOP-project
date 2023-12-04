@@ -26,6 +26,10 @@ class Enemy{
         void setPosition(int x,int y);
         Enemy();
         ~Enemy();
+        friend bool operator==(const SDL_Rect& e, const SDL_Rect& p);
 };
+
+bool operator==(const SDL_Rect& e, const SDL_Rect& p);
+
 
 #endif // ENEMY_HPP
