@@ -1,5 +1,5 @@
+#ifndef ENEMY_HPP
 #define ENEMY_HPP
-
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -27,3 +27,5 @@ class Enemy{
         Enemy();
         ~Enemy();
 };
+
+#endif // ENEMY_HPP
