@@ -5,6 +5,7 @@
 #include "maps.hpp"
 #include <vector>
 #include "Plants.hpp"
+#include "enemy.hpp"
 
 int changeMap (int* g[64][36], int* m[64][36]) {
     for (int i = 0; i < 64; i++) {
@@ -19,6 +20,8 @@ int main(int argc, char* args[]) {
     // Initializing SDL
 
     Player player;
+    
+    Enemy enemy;
     // std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -61,6 +64,7 @@ int main(int argc, char* args[]) {
 
 
       SDL_Surface* playerSurface = IMG_Load("temp_player.png");
+      SDL_Surface* enemySurface = IMG_Load("temp_player.jpg");
       std::cout<<"hello player"<<std::endl;
     if (playerSurface == NULL) {
         printf("Unable to load player image! SDL_image Error: %s\n", IMG_GetError());
@@ -70,6 +74,10 @@ int main(int argc, char* args[]) {
         // Create a texture from the player image surface
     SDL_Texture* playerTexture = SDL_CreateTextureFromSurface(renderer, playerSurface);
     SDL_FreeSurface(playerSurface); // Free the surface as the texture is created
+
+
+    SDL_Texture* enemyTexture = SDL_CreateTextureFromSurface(renderer, enemySurface);
+    SDL_FreeSurface(enemySurface); // Free the surface as the texture is created
 
 
 
@@ -203,6 +211,10 @@ while (!quit) {
     if (startGame) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
+        if (time % 120 == 0) {
+            enemy.go_to_player(player,grid);
+        }
+        
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {
                 // Define rectangle positions based on grid position and block size
@@ -261,7 +273,10 @@ while (!quit) {
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
         SDL_Rect playerRect = player.getPosition();
-        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect); 
+        SDL_Rect enemyRect= enemy.getPosition();
+        SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
+        SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+
     }
 
     // Present the renderer

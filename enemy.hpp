@@ -3,12 +3,15 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include "player.hpp"
 
 class Enemy{
     private:
         int health;
         int speed;
         int damage;
+        SDL_Rect position;
+
     
     public:
         //getters,setters,constructors,destructors
@@ -18,6 +21,9 @@ class Enemy{
         int getHealth();
         int getSpeed();
         int getDamage();
+        void go_to_player(Player& p,int grid[64][36]);
+        SDL_Rect& getPosition();
+        void setPosition(int x,int y);
         Enemy();
         ~Enemy();
 };
