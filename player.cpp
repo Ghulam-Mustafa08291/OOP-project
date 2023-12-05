@@ -3,8 +3,8 @@
 #include "enemy.hpp"
 #include <iostream>
 #include <vector>
-std::vector<Plants*> PlantObject; //will store all the plant type objects
-std::vector<Enemy*> Enemyobjects; //will store the enemy type objects
+// std::vector<Plants*> PlantObject; //will store all the plant type objects
+
 
 //below are the setters and constructor and destructor
 Player::Player(){

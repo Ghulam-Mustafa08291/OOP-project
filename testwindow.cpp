@@ -7,21 +7,21 @@
 #include "Plants.hpp"
 #include "enemy.hpp"
 
-int changeMap (int* g[64][36], int* m[64][36]) {
-    for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 36; j++) {
-            g[i][j] = m[i][j];
-        }
-    }
-    return 0;
-}
+// int changeMap (int* g[64][36], int* m[64][36]) {
+//     for (int i = 0; i < 64; i++) {
+//         for (int j = 0; j < 36; j++) {
+//             g[i][j] = m[i][j];
+//         }
+//     }
+//     return 0;
+// }
 
 int main(int argc, char* args[]) {
     // Initializing SDL
 
     Player player;
-    
-    Enemy enemy;
+
+    std::vector<Enemy*> Enemyobjects; //will store the enemy type objects
     // std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -211,8 +211,10 @@ while (!quit) {
     if (startGame) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
-        if (time % 120 == 0) {
-            enemy.go_to_player(player,grid);
+        if (time % 9999999999999999999 == 0) {
+            for (int i = 0; i < Enemyobjects.size(); i++) {
+                Enemyobjects[i]->go_to_player(player,grid);
+            }
         }
         
         for (int i = 0; i < 64; ++i) {
@@ -229,9 +231,9 @@ while (!quit) {
                 }
                 else if (grid[i][j] == 2) {
                     SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
-                    if (time % 120 == 0) {
-                        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
-                        grid[i + 1][j] = 4;
+                    if (time % 999 == 0) {
+                        Enemy* newEnemy = new Enemy {i, j};
+                        Enemyobjects.push_back(newEnemy);
                     }
                     else {
                         SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
@@ -239,11 +241,6 @@ while (!quit) {
                 }
                 else if (grid[i][j] == 3) {
                     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, plant
-                }
-                else if (grid[i][j] == 4) {
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
-                    grid[i+1][j] == 4;
-                    grid[i][j] == 0;
                 }
                 SDL_RenderFillRect(renderer, &blockRect);
             }
@@ -273,15 +270,36 @@ while (!quit) {
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
         SDL_Rect playerRect = player.getPosition();
-        SDL_Rect enemyRect= enemy.getPosition();
+        // SDL_Rect enemyRect= enemy.getPosition();
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
-        SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        // SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+
+        for (int i = 0; i < Enemyobjects.size(); i++) {
+            Enemyobjects[i]->go_to_player(player,grid);
+            SDL_Rect enemyRect= Enemyobjects[i]->getPosition();
+            SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        }
+
+        if (player.getHealth() <= 0) {
+            startGame = false;
+        }
 
     }
 
+    if (startGame == false) {
+        for (int i = 0; i < Enemyobjects.size(); i++) {
+            delete Enemyobjects[i];
+        }
+    }
     // Present the renderer
     SDL_RenderPresent(renderer);
 }
+
+    if (startGame == false) {
+        for (int i = 0; i < Enemyobjects.size(); i++) {
+            delete Enemyobjects[i];
+        }
+    }
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
 

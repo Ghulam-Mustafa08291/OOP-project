@@ -27,6 +27,7 @@ class Enemy{
         void deal_damage(Player& p);
 
         Enemy();
+        Enemy(int i, int j);
         ~Enemy();
         friend bool operator==(const SDL_Rect& e, const SDL_Rect& p);
 };
