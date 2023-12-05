@@ -40,11 +40,17 @@ void Enemy::setPosition(int x,int y){
 }
 
 
-
+ 
 
 void Enemy::deal_damage(Player& p){
+    if(p.get_is_alive()==true){
     p.setHealth((p.getHealth()-this->damage)); //subtracting the amount by health
     std::cout<<"Player health falling,health: "<<p.getHealth()<<std::endl;
+    }
+    else{
+        std::cout<<"Enemy killed player!"<<std::endl;
+        //show the end screen below
+    }
 }
 
 
@@ -147,6 +153,9 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             }
         }
     }
+    else{
+        this->deal_damage(p);
+    }
 
 
 }
@@ -158,7 +167,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
 
 
 Enemy::Enemy()
-:health{100},speed{1},damage{5},position{1240,60,20,20} //assuming random values for them now
+:health{100},speed{1},damage{10},position{1240,60,20,20} //assuming random values for them now
 {}
 
 Enemy::Enemy(int i, int j)

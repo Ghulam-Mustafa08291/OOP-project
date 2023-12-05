@@ -18,6 +18,7 @@ class Player{
         int magicBeans;
         int armour;
         float speed;
+        bool is_alive;
         SDL_Rect position;
         
         char* equippedWeapon;
@@ -34,6 +35,7 @@ class Player{
         void setPosition(int x, int y);
         void setEquippedWeapon(char* ew);
         void setEquippedArmour(char* ea);
+        bool get_is_alive();
         int getHealth();
         int getAttack();
         int getGold();
