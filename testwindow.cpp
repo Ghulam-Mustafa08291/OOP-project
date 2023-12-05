@@ -18,6 +18,8 @@ int changeMap (int* g[64][36], int* m[64][36]) {
     return 0;
 }
 
+std::vector<Enemy*> enemies;
+
 int initMixer = Mix_Init(MIX_INIT_MP3);
 
 int main(int argc, char* args[]) {
@@ -25,7 +27,7 @@ int main(int argc, char* args[]) {
 
     Player player;
     
-    Enemy enemy;
+    // Enemy enemy;
     std::vector<Plants*> PlantObject; //will store all the plant type objects
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
@@ -228,9 +230,7 @@ while (!quit) {
     if (startGame) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
-        if (time % 120 == 0) {
-            enemy.go_to_player(player,grid);
-        }
+
         
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {
@@ -246,23 +246,32 @@ while (!quit) {
                 }
                 else if (grid[i][j] == 2) {
                     SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
-                    if (time % 120 == 0) {
-                        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
-                        grid[i + 1][j] = 4;
-                    }
-                    else {
-                        SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
+                    // if (time % 120 == 0) {
+                    //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
+                    //     grid[i + 1][j] = 4;
+                    // }
+                    // else {
+                    //     SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
+                    // }
+
+                    // Create a new enemy every 100 ticks
+                    if (time % 100 == 0) {
+                        // Create a new enemy on the heap
+                        Enemy* newEnemy = new Enemy(i, j);
+
+                        // Add the new enemy to the vector
+                        enemies.push_back(newEnemy);
                     }
                 }
                 else if (grid[i][j] == 3) { //plants will be stationary
                     SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
                     Shooter* shooter_plant=new Shooter{i,j};//have to push in vector
                 }
-                else if (grid[i][j] == 4) {
-                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
-                    grid[i+1][j] == 4;
-                    grid[i][j] == 0;
-                }
+                // else if (grid[i][j] == 4) {
+                //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
+                //     grid[i+1][j] == 4;
+                //     grid[i][j] == 0;
+                // }
                 SDL_RenderFillRect(renderer, &blockRect);
             }
         }
@@ -290,10 +299,22 @@ while (!quit) {
 
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
+        // Update and render existing enemies
+        for (Enemy* enemy : enemies) {
+            // Update enemy logic (e.g., chasing the player)
+            // For now, assuming a simple update function in the Enemy class
+            enemy->update(player.getPosition(), grid);
+
+            // Render enemy on the grid
+            // For now, assuming a simple render function in the Enemy class
+            SDL_Rect enemyRect= enemy->getPosition();
+            SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        }
+
         SDL_Rect playerRect = player.getPosition();
-        SDL_Rect enemyRect= enemy.getPosition();
+        // SDL_Rect enemyRect= enemy.getPosition();
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
-        SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        // SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
 
     }
 
