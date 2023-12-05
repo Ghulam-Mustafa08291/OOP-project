@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include "player.hpp"
 #include "maps.hpp"
 #include <vector>
@@ -16,6 +17,8 @@ int changeMap (int* g[64][36], int* m[64][36]) {
     return 0;
 }
 
+int initMixer = Mix_Init(MIX_INIT_MP3);
+
 int main(int argc, char* args[]) {
     // Initializing SDL
 
@@ -24,10 +27,23 @@ int main(int argc, char* args[]) {
     Enemy enemy;
     // std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
 
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+
+    Mix_Music* music = Mix_LoadMUS("audio/gohan_theme.mp3");
+    if (!music) {
+        std::cout << "Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
+    }
+    else {
+    Mix_PlayMusic(music, 2); // If the music loaded successfully, play it
+    }
+    // Mix_Chunk* sound = Mix_LoadWAV()
+
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
         return 1; //returning for stopping
     }
+
+    
 
     // Creating  a window
     SDL_Window* window = SDL_CreateWindow("Sample Game Screen", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1280, 720, SDL_WINDOW_SHOWN);
