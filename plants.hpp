@@ -9,6 +9,7 @@ class Plants{
     private:
         int health;
         int cost;
+        SDL_Rect position;
     
     public:
         //getters,setters,constructors,destructors
@@ -19,7 +20,8 @@ class Plants{
         Plants();
         virtual ~Plants(); //keeping the destructor here virtual since this class will be the parent class for other classes
         void decrease_from_cost(int p);
-        virtual void affirmation()=0;
+        void setPosition(int x,int y);
+        //virtual void affirmation()=0;
 };
 
 

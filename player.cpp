@@ -1,6 +1,7 @@
 #include "player.hpp"
 #include "plants.hpp"
 #include "enemy.hpp"
+#include "shooter.hpp"
 #include <iostream>
 #include <vector>
 // std::vector<Plants*> PlantObject; //will store all the plant type objects
@@ -14,6 +15,7 @@ Player::Player(){
     this->magicBeans;
     this->armour=20;
     this->speed=1;
+    this->is_alive=true;
     this->position.x=20;
     this->position.y=20;
     this->position.h=20;
@@ -44,6 +46,7 @@ Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char*
 Player::~Player(){
     std::cout<<"Goodbye Player!"<<std::endl;
 }
+
 void Player::setHealth(int h) {this->health = h;}
 void Player::setAttack(int a) {this->attack = a;}
 void Player::setGold(int g) {this->gold = g;}   
@@ -60,7 +63,12 @@ void Player::setEquippedWeapon(char* inp_weapon){
 
 void Player::setEquippedArmour(char* inp_armour){
     this->equippedArmour=inp_armour;
-    }
+
+}
+bool Player::get_is_alive(){
+    if (this->health > 0) return true; else return false;
+}
+
 
 
 //below are the getters
@@ -127,7 +135,8 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     // Check if the grid position to the right of the player is not blocked
                     if (grid[gridX][gridY] == 0) {
                         grid[gridX][gridY] = 3;
-                        std::cout << "Planting Sunflower" << std::endl;
+                        std::cout << "Planting shooter plant!" << std::endl;
+                        
                     }
                     break;
                 // Add more cases for other keys if needed

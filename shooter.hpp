@@ -2,6 +2,7 @@
 #define SHOOTER_HPP
 
 #include "plants.hpp"
+#include "enemy.hpp"
 #include <SDL.h>
 #include <SDL_image.h>
 
@@ -19,9 +20,10 @@ public:
     void set_damage(int dmg);
     int get_range();
     void set_range(int rng);
-    void shoot_projectile();
+    void shoot_projectile(Enemy& e);
     //constructor and destructor
     Shooter();
+    Shooter(int row,int col);
     ~Shooter();
 };
 

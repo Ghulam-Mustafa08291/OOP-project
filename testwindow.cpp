@@ -7,6 +7,7 @@
 #include <vector>
 #include "Plants.hpp"
 #include "enemy.hpp"
+#include "shooter.hpp"
 
 int changeMap (int* g[64][36], int* m[64][36]) {
     for (int i = 0; i < 64; i++) {
@@ -25,7 +26,7 @@ int main(int argc, char* args[]) {
     Player player;
     
     Enemy enemy;
-    // std::vector<Plants*> plantObjects; //will store obejects pf plant and its inherited data types here
+    std::vector<Plants*> PlantObject; //will store all the plant type objects
 
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
@@ -253,8 +254,9 @@ while (!quit) {
                         SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
                     }
                 }
-                else if (grid[i][j] == 3) {
-                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, plant
+                else if (grid[i][j] == 3) { //plants will be stationary
+                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
+                    Shooter* shooter_plant=new Shooter{i,j};//have to push in vector
                 }
                 else if (grid[i][j] == 4) {
                     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
