@@ -1,9 +1,9 @@
 #include "Healing.hpp"
 #include <iostream>
 
-void Healing::increase_health(Player& p){
+void Healing::help_player(Player& p){
     p.add_to_health(20);
-    std::cout<<"increasing the player's health! new health"<<p.getHealth()<<std::endl;
+    std::cout<<"increasing the player's health! new health: "<<p.getHealth()<<std::endl;
     
 }
 Healing::Healing(){

@@ -24,6 +24,8 @@ class Enemy{
         void go_to_player(Player& p,int grid[64][36]);
         SDL_Rect& getPosition();
         void setPosition(int x,int y);
+        void deal_damage(Player& p);
+
         Enemy();
         ~Enemy();
         friend bool operator==(const SDL_Rect& e, const SDL_Rect& p);

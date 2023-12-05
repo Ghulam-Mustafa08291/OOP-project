@@ -1,7 +1,7 @@
 #include "AttackUp.hpp"
 #include <iostream>
 
-void AttackUp::increase_attack(Player& p){
+void AttackUp::help_player(Player& p){
     p.add_to_attack(20);
     std::cout<<"increasing attack! new attack power: "<<p.getAttack()<<std::endl;
 }

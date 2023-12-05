@@ -1,7 +1,7 @@
 #include "Speedup.hpp"
 #include <iostream>
 
-void SpeedUp::increase_speed(Player& p)
+void SpeedUp::help_player(Player& p)
     {   
         p.add_to_speed(10);
         std::cout<<"inreasing the players speed! new Speed: "<<p.getSpeed()<<std::endl;

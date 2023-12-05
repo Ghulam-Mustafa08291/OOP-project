@@ -7,7 +7,7 @@
 
 class Healing: public Powerups{
     public:
-        void increase_health(Player& p);
+        void help_player(Player& p) override;
         Healing();
         ~Healing();
 

@@ -7,7 +7,7 @@
 
 class SpeedUp : public Powerups {
     public:
-        void increase_speed(Player& p);
+        void help_player(Player& p) override;
         SpeedUp();
         ~SpeedUp();
 

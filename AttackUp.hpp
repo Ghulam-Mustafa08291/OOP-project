@@ -8,7 +8,7 @@
 
 class AttackUp: public Powerups{
     public:
-        void increase_attack(Player& p);
+        void help_player(Player& p) override;
         AttackUp();
         ~AttackUp();
 };

@@ -40,17 +40,12 @@ void Enemy::setPosition(int x,int y){
 }
 
 
-// bool Enemy::operator==( const SDL_Rect& pos){ 
-//     if(this->getPosition().x==pos.x && this->getPosition().y==pos.y){
-//         return true;
-//     }
-//     else{
-//         return false;
-//     }
-// }
 
 
-
+void Enemy::deal_damage(Player& p){
+    p.setHealth((p.getHealth()-this->damage)); //subtracting the amount by health
+    std::cout<<"Player health falling,health: "<<p.getHealth()<<std::endl;
+}
 
 
 
@@ -152,7 +147,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
 
 
 Enemy::Enemy()
-:health{100},speed{1},damage{5},position{1280,720,20,20} //assuming random values for them now
+:health{100},speed{1},damage{5},position{1240,60,20,20} //assuming random values for them now
 {}
 
 Enemy::~Enemy(){} 

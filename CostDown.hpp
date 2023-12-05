@@ -10,7 +10,8 @@
 
 class CostDown: public Powerups{
     public:
-        void decrease_cost(Plants& p);
+        void decrease_cost(Plants& p) override;
+        void help_player (Player& p) override;
         CostDown();
         ~CostDown();
 };
