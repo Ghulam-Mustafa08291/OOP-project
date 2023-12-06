@@ -49,11 +49,11 @@ Player::~Player(){
 
 void Player::setHealth(int h) 
 {
-    if(h>0){
+    if(h>=0){
     this->health = h;
     }
     else{
-        std::cout<<"health must be more than 0"<<std::endl;
+        std::cout<<"health must be more than -1"<<std::endl;
     }
 }
 
