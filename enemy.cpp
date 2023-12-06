@@ -86,7 +86,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
                 if (grid_enemy_x!=grid_player_x){
                     grid_enemy_x=grid_enemy_x-1;
                     this->setPosition(enemy_x-20,enemy_y);
-                    // std::cout<<"i com hard for u"<<std::endl;
+                    // std::cout<<"i come to u"<<std::endl;
                 }
 
                 if (grid_enemy_y!=grid_player_y){
@@ -99,26 +99,26 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y=grid_enemy_y-1;
                 this->setPosition(enemy_x,enemy_y-20);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
         if (grid_player_x>grid_enemy_x && grid_player_y<grid_enemy_y){
             while(grid_enemy_x!=grid_player_x){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y-=1;
                 this->setPosition(enemy_x,enemy_y-20);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
         if (grid_player_x>grid_enemy_x && grid_player_y==grid_enemy_y){
             while(grid_enemy_x!=grid_player_x){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
 
@@ -126,12 +126,12 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             while(grid_enemy_x!=grid_player_x){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
 
@@ -139,7 +139,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
 
@@ -147,12 +147,12 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             while(grid_enemy_x!=grid_player_x){
                 grid_enemy_x-=1;
                 this->setPosition(enemy_x-20,enemy_y);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
 
@@ -160,7 +160,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
             while(grid_enemy_x!=grid_player_x){
                 grid_enemy_x-=1;
                 this->setPosition(enemy_x-20,enemy_y);
-                // std::cout<<"i com hard for u"<<std::endl;
+                // std::cout<<"i come to u"<<std::endl;
             }
         }
     }

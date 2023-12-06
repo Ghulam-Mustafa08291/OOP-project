@@ -20,7 +20,7 @@ int changeMap (int* g[64][36], int* m[64][36]) {
 
 std::vector<Enemy*> enemies;
 
-//int initMixer = Mix_Init(MIX_INIT_MP3);
+int initMixer = Mix_Init(0);
 
 int main(int argc, char* args[]) {
     // Initializing SDL
@@ -30,16 +30,25 @@ int main(int argc, char* args[]) {
     // Enemy enemy;
     std::vector<Plants*> PlantObject; //will store all the plant type objects
 
-    //Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
-    // Mix_Music* music = Mix_LoadMUS("audio/gohan_theme.mp3");
-    // if (!music) {
-    //     std::cout << "Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
-    // }
-    // else {
-    // Mix_PlayMusic(music, 2); // If the music loaded successfully, play it
-    // }
-    // // Mix_Chunk* sound = Mix_LoadWAV()
+    Mix_Music* battle_music = Mix_LoadMUS("audio/gohan_theme.wav");
+    Mix_Music* menu_music = Mix_LoadMUS("audio/pain_theme.wav");
+
+    if (!battle_music) {
+        std::cout << "Battle Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
+    }
+    
+    if (!menu_music) {
+        std::cout << "Menu Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
+    }
+
+
+    Mix_Chunk* damage_sound = Mix_LoadWAV("audio/oof.wav");
+    Mix_Chunk* room_change_sound = Mix_LoadWAV("audio/room_change_noise.wav");
+    Mix_Chunk* projectile_sound = Mix_LoadWAV("audio/projectile_noise.wav");
+
+    Mix_PlayMusic(menu_music, -1);
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
@@ -210,7 +219,10 @@ while (!quit) {
             quit = true;
         }
         if (e.key.keysym.sym == SDLK_SPACE) { // Assuming space key starts the game
-                startGame = true; // Set the flag to start the game
+            startGame = true; // Set the flag to start the game
+            Mix_PauseMusic();
+            Mix_PlayChannel(-1, room_change_sound, 0);
+            Mix_PlayMusic(battle_music, -1);
         }
         else if (e.type == SDL_KEYDOWN) {
             // Call move() function for player movement
