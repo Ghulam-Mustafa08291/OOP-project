@@ -91,7 +91,7 @@ int main(int argc, char* args[]) {
 
 
 
-      SDL_Surface* playerSurface = IMG_Load("temp_player.png");
+      SDL_Surface* playerSurface = IMG_Load("sunflower.png");
       SDL_Surface* enemySurface = IMG_Load("temp_player.jpg");
       std::cout<<"hello player"<<std::endl;
     if (playerSurface == NULL) {

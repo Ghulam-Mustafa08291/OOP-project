@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <cmath>
+#include <SDL_mixer.h>
 
 
 bool operator==(const SDL_Rect& e, const SDL_Rect& p) {
@@ -57,6 +58,12 @@ void Enemy::deal_damage(Player& p){
     if(p.get_is_alive()==true){
     p.setHealth((p.getHealth()-this->damage)); //subtracting the amount by health
     std::cout<<"Player health falling,health: "<<p.getHealth()<<std::endl;
+    int initMixer = Mix_Init(0);
+
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+
+    Mix_Chunk* damage_sound = Mix_LoadWAV("audio/oof.wav");
+    Mix_PlayChannel(-1, damage_sound, 0);
     }
     else{
         std::cout<<"Enemy killed player!"<<std::endl;
