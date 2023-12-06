@@ -47,15 +47,71 @@ Player::~Player(){
     std::cout<<"Goodbye Player!"<<std::endl;
 }
 
-void Player::setHealth(int h) {this->health = h;}
-void Player::setAttack(int a) {this->attack = a;}
-void Player::setGold(int g) {this->gold = g;}   
-void Player::setMagicBeans(int mb) {this->magicBeans = mb;}
-void Player::setArmour(int ar) {this->armour = ar;}
-void Player::setSpeed(float s) {this->speed = s;}
+void Player::setHealth(int h) 
+{
+    if(h>0){
+    this->health = h;
+    }
+    else{
+        std::cout<<"health must be more than 0"<<std::endl;
+    }
+}
+
+void Player::setAttack(int a) 
+{
+    if(a>0){
+    this->attack = a;
+    }
+
+    else{
+        std::cout<<"attack can not be 0!!"<<std::endl;
+    }
+}
+void Player::setGold(int g) 
+{
+    if(g>=0){
+    this->gold = g;
+    }
+    else{
+        std::cout<<"gold can not be negative!"<<std::endl;
+    }
+} 
+  
+void Player::setMagicBeans(int mb) 
+{
+    if(mb>-0){
+    this->magicBeans = mb;
+    }
+    else{
+        std::cout<<"magic beans can not be less than 0"<<std::endl;
+    }
+}
+void Player::setArmour(int ar) 
+{
+    if(armour>=0){
+    this->armour = ar;
+    }
+    else{
+        std::cout<<"armour can not be negative"<<std::endl;
+    }
+}
+void Player::setSpeed(float s) 
+{
+    if(s>0){
+    this->speed = s;
+    }
+    else{
+        std::cout<<"speed must be more than 0"<<std::endl;
+    }
+}
 void Player::setPosition(int x, int y){
+    if(x>=0 && y>=0){
     this->position.x=x;
     this->position.y=y; 
+    }
+    else{
+        std::cout<<"position can not be negative"<<std::endl;
+    }
 }
 void Player::setEquippedWeapon(char* inp_weapon){
     this->equippedWeapon=inp_weapon;

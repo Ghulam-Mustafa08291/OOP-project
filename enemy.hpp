@@ -38,4 +38,5 @@ class Enemy{
 bool operator==(const SDL_Rect& e, const SDL_Rect& p);
 
 
+
 #endif // ENEMY_HPP

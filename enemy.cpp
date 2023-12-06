@@ -7,20 +7,35 @@
 #include <SDL_mixer.h>
 
 
-bool operator==(const SDL_Rect& e, const SDL_Rect& p) {
+bool operator==(const SDL_Rect& e, const SDL_Rect& p) { //overloaded the == operator
     return (e.x == p.x && e.y == p.y);
 }
 
 void Enemy::setHealth(int h){
-    this->health=h;
+    if(h>0){
+        this->health=h;
+    }
+    else{
+        std::cout<<"the health must be more than 0"<<std::endl;
+    }
 }
 
 void Enemy::setSpeed(int s){
-    this->speed=s;
+    if(s>0){
+        this->speed=s;
+    }
+    else{
+        std::cout<<"speed must be more than 0"<<std::endl;
+    }
 }
 
 void Enemy::setDamage(int d){
-    this->damage=d;
+    if(d>0){
+        this->damage=d;
+    }
+    else{
+        std::cout<<"damage must be more than 0"<<std::endl;
+    }
 }
 
 int Enemy::getHealth(){
@@ -38,8 +53,13 @@ SDL_Rect& Enemy::getPosition(){
     return this->position;
 }
 void Enemy::setPosition(int x,int y){
-    this->position.x=x;
-    this->position.y=y;
+    if(x>=0 && y>=0){
+        this->position.x=x;
+        this->position.y=y;
+    }
+    else{
+        std::cout<<"the cordinates can not be less than 0"<<std::endl;
+    }
 }
 
 

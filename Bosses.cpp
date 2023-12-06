@@ -2,16 +2,40 @@
 #include <iostream>
 
 int Bosses::get_health(){return this->health;}
-void Bosses::set_health(int h){this->health=h;}
+void Bosses::set_health(int h)
+{
+    if(h>0){this->health=h;}
+    else{
+        std::cout<<"health must be more than 0!"<<std::endl;
+    }
+}
 
 int Bosses::get_range(){return this->range;}
-void Bosses::set_range(int r){this->range=r;}
+void Bosses::set_range(int r)
+{
+    if(r>0){this->range=r;}
+    else{
+        std::cout<<"range must be more than 0"<<std::endl;
+    }
+}
 
 int Bosses::get_defence(){return this->defence;}
-void Bosses::set_defence(int d){this->defence=d;}
+void Bosses::set_defence(int d)
+{
+    if(d>0){this->defence=d;}
+    else{
+        std::cout<<"defence must be more than 0"<<std::endl;
+    }
+}
 
 int Bosses::get_speed(){return this->speed;}
-void Bosses::set_speed(int s){this->speed=s;}
+void Bosses::set_speed(int s)
+{
+    if(s>0){this->speed=s;}
+    else{
+        std::cout<<"speed must be more than 0!"<<std::endl;
+    }
+}
 
 void Bosses::get_phase(){std::cout<<"getting the phase!"<<std::endl;}
 void Bosses::trigger_phase(){std::cout<<"triggering the phase rn my king"<<std::endl;}
