@@ -20,7 +20,7 @@ int changeMap (int* g[64][36], int* m[64][36]) {
 
 std::vector<Enemy*> enemies;
 
-int initMixer = Mix_Init(MIX_INIT_MP3);
+//int initMixer = Mix_Init(MIX_INIT_MP3);
 
 int main(int argc, char* args[]) {
     // Initializing SDL
@@ -30,16 +30,16 @@ int main(int argc, char* args[]) {
     // Enemy enemy;
     std::vector<Plants*> PlantObject; //will store all the plant type objects
 
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
+    //Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 
-    Mix_Music* music = Mix_LoadMUS("audio/gohan_theme.mp3");
-    if (!music) {
-        std::cout << "Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
-    }
-    else {
-    Mix_PlayMusic(music, 2); // If the music loaded successfully, play it
-    }
-    // Mix_Chunk* sound = Mix_LoadWAV()
+    // Mix_Music* music = Mix_LoadMUS("audio/gohan_theme.mp3");
+    // if (!music) {
+    //     std::cout << "Music Error" << Mix_GetError() << std::endl << std::endl << std::endl;
+    // }
+    // else {
+    // Mix_PlayMusic(music, 2); // If the music loaded successfully, play it
+    // }
+    // // Mix_Chunk* sound = Mix_LoadWAV()
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError()); 
@@ -303,7 +303,7 @@ while (!quit) {
         for (Enemy* enemy : enemies) {
             // Update enemy logic (e.g., chasing the player)
             // For now, assuming a simple update function in the Enemy class
-            enemy->update(player.getPosition(), grid);
+            enemy->update(player, grid);
 
             // Render enemy on the grid
             // For now, assuming a simple render function in the Enemy class

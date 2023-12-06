@@ -25,7 +25,8 @@ class Enemy{
         SDL_Rect& getPosition();
         void setPosition(int x,int y);
         void deal_damage(Player& p);
-        void update(const SDL_Rect& playerPosition, int grid[64][36]);
+        void deal_damage(Plants& pl);
+        void update(Player& p, int grid[64][36]);
         bool isValidMove(int x, int y, int grid[64][36]);
 
         Enemy();

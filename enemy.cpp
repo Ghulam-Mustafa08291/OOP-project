@@ -42,7 +42,16 @@ void Enemy::setPosition(int x,int y){
 }
 
 
- 
+void Enemy::deal_damage(Plants& pl){
+    if (pl.getHealth()>0){
+        std::cout<<"fighting with shooter plant! plant health: "<<pl.getHealth()<<" enemy health: "<<this->getHealth()<<std::endl;;
+        pl.setHealth((pl.getHealth()-this->damage));//subtracting the amount by health
+    }
+    else{
+        std::cout<<"enemy destroyed plant!"<<std::endl;
+    }
+}
+
 
 void Enemy::deal_damage(Player& p){
     if(p.get_is_alive()==true){
@@ -180,30 +189,35 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
 
 
 // Inside the Enemy class
-void Enemy::update(const SDL_Rect& playerPosition, int grid[64][36]) {
+void Enemy::update(Player& p, int grid[64][36]) {
     // Calculate the vector from the enemy to the player
-    float deltaX = static_cast<float>(playerPosition.x - this->getPosition().x);
-    float deltaY = static_cast<float>(playerPosition.y - this->getPosition().y);
+    if ((this->getPosition() == p.getPosition())==false) {
+        float deltaX = static_cast<float>(p.getPosition().x - this->getPosition().x);
+        float deltaY = static_cast<float>(p.getPosition().y - this->getPosition().y);
 
-    // Calculate the distance between the enemy and the player
-    float distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
+        // Calculate the distance between the enemy and the player
+        float distance = std::sqrt(deltaX * deltaX + deltaY * deltaY);
 
-    // Normalize the direction vector (avoid division by zero)
-    float directionX = 0.0f;
-    float directionY = 0.0f;
-    if (distance != 0.0f) {
-        directionX = deltaX / distance;
-        directionY = deltaY / distance;
-    }
+        // Normalize the direction vector (avoid division by zero)
+        float directionX = 0.0f;
+        float directionY = 0.0f;
+        if (distance != 0.0f) {
+            directionX = deltaX / distance;
+            directionY = deltaY / distance;
+        }
 
-    // Move the enemy based on the normalized direction and speed
-    int newPosX = static_cast<int>(this->getPosition().x + this->getSpeed() * directionX);
-    int newPosY = static_cast<int>(this->getPosition().y + this->getSpeed() * directionY);
+        // Move the enemy based on the normalized direction and speed
+        int newPosX = static_cast<int>(this->getPosition().x + this->getSpeed() * directionX);
+        int newPosY = static_cast<int>(this->getPosition().y + this->getSpeed() * directionY);
 
-    // Update the position if the movement is valid within the grid
-    if (isValidMove(newPosX, newPosY, grid)) {
-        this->setPosition(newPosX, newPosY);
-    }
+        // Update the position if the movement is valid within the grid
+        if (isValidMove(newPosX, newPosY, grid)) {
+            this->setPosition(newPosX, newPosY);
+        }
+    }  
+    else{
+        this->deal_damage(p);
+    } 
 }
 
 // bool Enemy::isValidMove(int x, int y) {
