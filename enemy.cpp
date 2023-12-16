@@ -110,39 +110,39 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
     //will check for all possible conditions reltated to the player and enemies movement
         if (grid_player_x<grid_enemy_x && grid_player_y<grid_enemy_y){
             while (grid_enemy_x!=grid_player_x || grid_enemy_y!=grid_player_y){
-                if (grid_enemy_x!=grid_player_x){
+                if (grid_enemy_x!=grid_player_x && grid[grid_enemy_x-1][grid_enemy_y]!=1){
                     grid_enemy_x=grid_enemy_x-1;
                     this->setPosition(enemy_x-20,enemy_y);
                     // std::cout<<"i come to u"<<std::endl;
                 }
 
-                if (grid_enemy_y!=grid_player_y){
+                if (grid_enemy_y!=grid_player_y && grid[grid_enemy_x][grid_enemy_y-1]!=1){
                     grid_enemy_y=grid_enemy_y-1;
                     this->setPosition(enemy_x,enemy_y-20);
                 }
             }
         }
-        if (grid_enemy_x==grid_player_x && grid_player_y<grid_enemy_y){
+        if (grid_enemy_x==grid_player_x && grid_player_y<grid_enemy_y && grid[grid_enemy_x][grid_enemy_y-1]!=1){
             while(grid_enemy_y!=grid_player_y){
                 grid_enemy_y=grid_enemy_y-1;
                 this->setPosition(enemy_x,enemy_y-20);
                 // std::cout<<"i come to u"<<std::endl;
             }
         }
-        if (grid_player_x>grid_enemy_x && grid_player_y<grid_enemy_y){
-            while(grid_enemy_x!=grid_player_x){
+        if (grid_player_x>grid_enemy_x && grid_player_y<grid_enemy_y ){
+            while(grid_enemy_x!=grid_player_x &&  grid[enemy_x+1][enemy_y]!=1){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
                 // std::cout<<"i come to u"<<std::endl;
             }
-            while(grid_enemy_y!=grid_player_y){
+            while(grid_enemy_y!=grid_player_y && grid[enemy_x][enemy_y-1]!=1){
                 grid_enemy_y-=1;
                 this->setPosition(enemy_x,enemy_y-20);
                 // std::cout<<"i come to u"<<std::endl;
             }
         }
         if (grid_player_x>grid_enemy_x && grid_player_y==grid_enemy_y){
-            while(grid_enemy_x!=grid_player_x){
+            while(grid_enemy_x!=grid_player_x && grid[enemy_x+1][enemy_y]!=1){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
                 // std::cout<<"i come to u"<<std::endl;
@@ -150,12 +150,12 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
         }
 
         if (grid_player_x>grid_enemy_x && grid_player_y>grid_enemy_y){
-            while(grid_enemy_x!=grid_player_x){
+            while(grid_enemy_x!=grid_player_x && grid[enemy_x+1][enemy_y]!=1){
                 grid_enemy_x+=1;
                 this->setPosition(enemy_x+20,enemy_y);
                 // std::cout<<"i come to u"<<std::endl;
             }
-            while(grid_enemy_y!=grid_player_y){
+            while(grid_enemy_y!=grid_player_y && grid[enemy_x][enemy_y+1]!=1){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
                 // std::cout<<"i come to u"<<std::endl;
@@ -163,7 +163,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
         }
 
         if (grid_player_x==grid_enemy_x && grid_player_y>grid_enemy_y){
-            while(grid_enemy_y!=grid_player_y){
+            while(grid_enemy_y!=grid_player_y && grid[enemy_x][enemy_y+1]!=1){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
                 // std::cout<<"i come to u"<<std::endl;
@@ -171,12 +171,12 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
         }
 
         if (grid_player_x<grid_enemy_x && grid_player_y>grid_enemy_y){
-            while(grid_enemy_x!=grid_player_x){
+            while(grid_enemy_x!=grid_player_x && grid[enemy_x-1][enemy_y]!=1){
                 grid_enemy_x-=1;
                 this->setPosition(enemy_x-20,enemy_y);
                 // std::cout<<"i come to u"<<std::endl;
             }
-            while(grid_enemy_y!=grid_player_y){
+            while(grid_enemy_y!=grid_player_y && grid[enemy_x][enemy_y+1]!=1){
                 grid_enemy_y+=1;
                 this->setPosition(enemy_x,enemy_y+20);
                 // std::cout<<"i come to u"<<std::endl;
@@ -184,7 +184,7 @@ void Enemy::go_to_player(Player& p,int grid[64][36]){
         }
 
         if (grid_player_x<grid_enemy_x && grid_player_y==grid_enemy_y){
-            while(grid_enemy_x!=grid_player_x){
+            while(grid_enemy_x!=grid_player_x && grid[enemy_x-1][enemy_y]!=1){
                 grid_enemy_x-=1;
                 this->setPosition(enemy_x-20,enemy_y);
                 // std::cout<<"i come to u"<<std::endl;

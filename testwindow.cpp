@@ -312,14 +312,14 @@ while (!quit) {
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
         // Update and render existing enemies
-        for (Enemy* enemy : enemies) {
+        for (int i=0;i<enemies.size();i++) {
             // Update enemy logic (e.g., chasing the player)
             // For now, assuming a simple update function in the Enemy class
-            enemy->update(player, grid);
+            enemies[i]->update(player,grid);
 
             // Render enemy on the grid
             // For now, assuming a simple render function in the Enemy class
-            SDL_Rect enemyRect= enemy->getPosition();
+            SDL_Rect enemyRect= enemies[i]->getPosition();
             SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
         }
 
