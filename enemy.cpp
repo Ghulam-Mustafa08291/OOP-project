@@ -10,6 +10,9 @@
 bool operator==(const SDL_Rect& e, const SDL_Rect& p) { //overloaded the == operator
     return (e.x == p.x && e.y == p.y);
 }
+bool operator==( Enemy& e,Plants& p){ //another overload for the == operator
+    return e.getPosition().x == p.getposition().x && e.getPosition().y == p.getposition().y;
+}
 
 void Enemy::setHealth(int h){
     if(h>0){
