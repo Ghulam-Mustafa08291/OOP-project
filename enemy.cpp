@@ -275,7 +275,7 @@ bool Enemy::isValidMove(int x, int y, int grid[64][36]) {
     int cellX = x / 20; // Convert pixel coordinates to grid cell coordinates
     int cellY = y / 20;
 
-    if (grid[cellX][cellY] == 1) {
+    if (grid[cellX][cellY] == 1 || grid[cellX][cellY] == 3) {
         return false; // Collides with a wall
     }
 
@@ -299,4 +299,4 @@ Enemy::Enemy(int i, int j)
 :health{100},speed{1},damage{5},position{i*20,j*20,20,20}
 {}
 
-Enemy::~Enemy(){} 
+Enemy::~Enemy(){}

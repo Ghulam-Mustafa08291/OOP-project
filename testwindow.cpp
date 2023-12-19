@@ -91,11 +91,17 @@ int main(int argc, char* args[]) {
 
 
 
-      SDL_Surface* playerSurface = IMG_Load("sunflower.png");
+      SDL_Surface* playerSurface = IMG_Load("temp_player.png");
       SDL_Surface* enemySurface = IMG_Load("temp_player.jpg");
+      SDL_Surface* plantSurface = IMG_Load("sunflower.png");
       std::cout<<"hello player"<<std::endl;
     if (playerSurface == NULL) {
         printf("Unable to load player image! SDL_image Error: %s\n", IMG_GetError());
+        return 1;
+    }
+
+    if (plantSurface == NULL) {
+        printf("Unable to load plant image! SDL_image Error: %s\n", IMG_GetError());
         return 1;
     }
 
@@ -107,7 +113,8 @@ int main(int argc, char* args[]) {
     SDL_Texture* enemyTexture = SDL_CreateTextureFromSurface(renderer, enemySurface);
     SDL_FreeSurface(enemySurface); // Free the surface as the texture is created
 
-
+    SDL_Texture* plantTexture = SDL_CreateTextureFromSurface(renderer, plantSurface);
+    SDL_FreeSurface(plantSurface); // Free the surface as the texture is created
 
 
 
@@ -226,6 +233,10 @@ while (!quit) {
         }
         else if (e.type == SDL_KEYDOWN) {
             // Call move() function for player movement
+            if (e.type == SDLK_q) {
+                Shooter* shooter_plant = new Shooter{player.getPosition().x,player.getPosition().y};
+                PlantObject.push_back(shooter_plant);
+            }
             player.move(e, grid); // Pass the event to the player's move function
         }
         // Handle other types of events here if needed
@@ -275,10 +286,13 @@ while (!quit) {
                         enemies.push_back(newEnemy);
                     }
                 }
-                else if (grid[i][j] == 3) { //plants will be stationary
-                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
-                    Shooter* shooter_plant=new Shooter{i,j};//have to push in vector
-                }
+                // else if (grid[i][j] == 3) { //plants will be stationary
+                //     // SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
+                    
+                //     Shooter* shooter_plant = new Shooter{i,j};//have to push in vector
+                //     SDL_Rect plantRect = shooter_plant->getposition();
+                //     SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+                // }
                 // else if (grid[i][j] == 4) {
                 //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
                 //     grid[i+1][j] == 4;
@@ -323,11 +337,36 @@ while (!quit) {
             SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
         }
 
+        for (int i=0;i<PlantObject.size();i++) {
+            // Render plant on the grid
+            // For now, assuming a simple render function in the Plant class
+            SDL_Rect plantRect= enemies[i]->getPosition();
+            SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+        }
+
+
+        for (int i=0;i<enemies.size();i++) {
+            // Update enemy logic (e.g., chasing the player)
+            // For now, assuming a simple update function in the Enemy class
+            enemies[i]->update(player,grid);
+
+            // Render enemy on the grid
+            // For now, assuming a simple render function in the Enemy class
+            SDL_Rect enemyRect= enemies[i]->getPosition();
+            SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        }
+
         SDL_Rect playerRect = player.getPosition();
         // SDL_Rect enemyRect= enemy.getPosition();
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
         // SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
 
+    }
+
+    if (player.get_is_alive() == false) {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+        break;
     }
 
     // Present the renderer
@@ -337,6 +376,18 @@ while (!quit) {
     SDL_DestroyTexture(imageTexture);
 
     SDL_DestroyTexture(playerTexture);
+    SDL_DestroyTexture(enemyTexture);
+    SDL_DestroyTexture(plantTexture);
+
+    for (int i=0;i<PlantObject.size();i++) {
+        delete PlantObject[i];
+        PlantObject[i] = nullptr;
+    }
+
+    for (int i=0;i<enemies.size();i++) {
+        delete enemies[i];
+        enemies[i] = nullptr;
+    }
 
     // Destroy window
     SDL_DestroyWindow(window);

@@ -36,6 +36,11 @@ void Plants::setPosition(int x,int y){
         std::cout << "coordinates cannot be negative!" << std::endl;
     }
 }
+
+SDL_Rect Plants::getposition() {
+    return this->position;
+}
+
 Plants::Plants()
 :health{100},cost{50} //assuming random values for them now
 {}
