@@ -37,7 +37,7 @@ void Plants::setPosition(int x,int y){
     }
 }
 
-SDL_Rect Plants::getposition() {
+SDL_Rect Plants::getPosition() {
     return this->position;
 }
 

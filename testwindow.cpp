@@ -285,13 +285,13 @@ while (!quit) {
                         enemies.push_back(newEnemy);
                     }
                 }
-                // else if (grid[i][j] == 3) { //plants will be stationary
-                //     // SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
+                else if (grid[i][j] == 3) { //plants will be stationary
+                    SDL_SetRenderDrawColor(renderer, 0, 128, 0, 255); // Green color, shooter plant
                     
-                //     Shooter* shooter_plant = new Shooter{i,j};//have to push in vector
-                //     SDL_Rect plantRect = shooter_plant->getposition();
-                //     SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-                // }
+                    // Shooter* shooter_plant = new Shooter{i,j};//have to push in vector
+                    // SDL_Rect plantRect = shooter_plant->getposition();
+                    // SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+                }
                 // else if (grid[i][j] == 4) {
                 //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
                 //     grid[i+1][j] == 4;
@@ -339,7 +339,7 @@ while (!quit) {
         for (int i=0;i<PlantObject.size();i++) {
             // Render plant on the grid
             // For now, assuming a simple render function in the Plant class
-            SDL_Rect plantRect= enemies[i]->getPosition();
+            SDL_Rect plantRect= PlantObject[i]->getPosition();
             SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
         }
 

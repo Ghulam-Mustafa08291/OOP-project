@@ -191,7 +191,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     // Check if the grid position to the right of the player is not blocked
                     if (grid[gridX][gridY] == 0  && grid[gridX][gridY] != 3) {
                         grid[gridX][gridY] = 3;
-                        std::cout << "Planting shooter plant!" << std::endl;
+                        std::cout << "Planting plant!" << std::endl;
                     }
                     break;
             }

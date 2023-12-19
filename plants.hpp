@@ -21,7 +21,7 @@ class Plants{
         virtual ~Plants(); //keeping the destructor here virtual since this class will be the parent class for other classes
         void decrease_from_cost(int p);
         void setPosition(int x,int y);
-        SDL_Rect getposition();
+        SDL_Rect getPosition();
         //virtual void affirmation()=0;
 };
 
