@@ -1,7 +1,7 @@
 #include "CostDown.hpp"
 #include <iostream>
 
-void CostDown::help_plant(Plants& p){
+void CostDown::help_plant(Plants& p) {
     p.setCost(p.getCost() - (p.getCost()*0.15));
     std::cout<<"decreasing the price of plants! new price: "<<p.getCost()<<std::endl;
 }
