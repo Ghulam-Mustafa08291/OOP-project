@@ -3,7 +3,6 @@
 #include <SDL_image.h>
 #include <SDL_mixer.h>
 #include "player.hpp"
-#include "maps.hpp"
 #include <vector>
 #include "Plants.hpp"
 #include "enemy.hpp"
@@ -364,14 +363,14 @@ while (!quit) {
     }
 
     if (player.get_is_alive() == false) {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
         break;
     }
 
     // Present the renderer
     SDL_RenderPresent(renderer);
 }
+
+    SDL_RenderClear(renderer);
     // Destroy texture
     SDL_DestroyTexture(imageTexture);
 
@@ -388,6 +387,12 @@ while (!quit) {
         delete enemies[i];
         enemies[i] = nullptr;
     }
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+    std::cin;
+
+    SDL_RenderClear(renderer);
 
     // Destroy window
     SDL_DestroyWindow(window);
