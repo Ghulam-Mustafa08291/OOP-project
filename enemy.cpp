@@ -10,8 +10,13 @@
 bool operator==(const SDL_Rect& e, const SDL_Rect& p) { //overloaded the == operator
     return (e.x == p.x && e.y == p.y);
 }
+
+bool operator==( Enemy& e,Player& p){ //another overload for the == operator
+    return e.getPosition().x == p.getPosition().x && e.getPosition().y == p.getPosition().y;
+}
+
 bool operator==( Enemy& e,Plants& p){ //another overload for the == operator
-    return e.getPosition().x == p.getposition().x && e.getPosition().y == p.getposition().y;
+    return e.getPosition().x == p.getPosition().x && e.getPosition().y == p.getPosition().y;
 }
 
 void Enemy::setHealth(int h){
@@ -103,7 +108,7 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
 
     int new_x = position.x;  
     int new_y = position.y;  
-    if((this->getPosition()==p.getPosition())==false){
+    if((*this==p)==false){
 
     
 

@@ -34,6 +34,7 @@ class Enemy{
         ~Enemy();
         friend bool operator==(const SDL_Rect& e, const SDL_Rect& p);
         friend bool operator==(const Enemy& e, const Plants& p);
+        friend bool operator==(const Enemy& e, const Player& p);
 };
 
 bool operator==(const SDL_Rect& e, const SDL_Rect& p);
