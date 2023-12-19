@@ -5,6 +5,8 @@
 #include <SDL_image.h>
 #include "plants.hpp"
 #include <vector>
+#include "Armour.hpp"
+#include "Weapons.hpp"
 
 //health,attack,gold,magicbeans,armour,speed,position,equipped weapon,equipped armour
 
@@ -21,8 +23,8 @@ class Player{
         bool is_alive;
         SDL_Rect position;
         
-        char* equippedWeapon;
-        char* equippedArmour;
+        Armour* playerArmour;
+        Weapons* playerWeapon;
 
     public:
         //getters,setters,constructors,destructors

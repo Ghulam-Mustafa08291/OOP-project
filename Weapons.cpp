@@ -36,10 +36,10 @@ void Weapons::set_attack_speed(int s)
 }
 
 Weapons::Weapons(){
-    std::cout<<"Weapon base class created!"<<std::endl;
+    std::cout<<"Weapon created!"<<std::endl;
 
 }
 
 Weapons::~Weapons(){
-    std::cout<<"goodbye my weapon ,rip"<<std::endl;
+    std::cout<<"goodbye my weapon"<<std::endl;
 }

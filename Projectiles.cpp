@@ -35,9 +35,9 @@ void Projectiles::set_time(int s)
 }
 
 
-void in_contact(){std::cout<<"how tf am i supposed to know that i am in contact?!"<<std::endl;}
+void in_contact(){std::cout<<"contacted"<<std::endl;}
 void get_positon(){std::cout<<"getting position"<<std::endl;}
-void deal_damage(){std::cout<<"dealing damage now jhehe"<<std::endl;}
+void deal_damage(){std::cout<<"dealing damage"<<std::endl;}
 
-Projectiles::Projectiles(){std::cout<<"hello Projectiles the base class!"<<std::endl;}
-Projectiles::~Projectiles(){std::cout<<"bye mr Projectiles base class"<<std::endl;}
+Projectiles::Projectiles(){std::cout<<"Projectile spawned"<<std::endl;}
+Projectiles::~Projectiles(){std::cout<<"Projectile destroyed"<<std::endl;}

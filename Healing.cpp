@@ -7,9 +7,9 @@ void Healing::help_player(Player& p){ //overriding this method here
     
 }
 Healing::Healing(){
-    std::cout<<"healing type plant planted!"<<std::endl;
+    std::cout<<"healing powerup spawned"<<std::endl;
 }
 
 Healing::~Healing(){
-    std::cout<<"goodbye healing type plant!"<<std::endl;
+    std::cout<<"healing powerup destroyed"<<std::endl;
 }

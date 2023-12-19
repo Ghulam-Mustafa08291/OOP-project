@@ -35,7 +35,7 @@ void Shooter::set_range(int inp_range)
 }
 
 void Shooter::shoot_projectile(Enemy& e){
-    std::cout<<"imma shoot hehe"<<std::endl;
+    std::cout<<"shooting"<<std::endl;
     e.setHealth(e.getHealth()-this->get_damage()); //decreasing the health of the enemy
     std::cout<<"shooting enemy! enemy health: "<<e.getHealth()<<std::endl;
 }
@@ -45,4 +45,4 @@ Shooter::Shooter(int row,int col){
     this->attack_freq=5; this->damage=10; this->range=20;
     this->setPosition(row*20,col*20);
 }
-Shooter::~Shooter(){std::cout<<"bye bye shooter:("<<std::endl;}
+Shooter::~Shooter(){std::cout<<"plant destroyed"<<std::endl;}

@@ -1,13 +1,9 @@
 #include "CostDown.hpp"
 #include <iostream>
 
-void CostDown::decrease_cost(Plants& p){
-    p.decrease_from_cost(5);
-    std::cout<<"decreasing the prize of plants! new price: "<<p.getCost()<<std::endl;
-}
-
-void CostDown::help_player(Player& p){
-    std::cout<<"giving a basic implementation for this method so that this class wont become an abstract class"<<std::endl;
+void CostDown::help_plant(Plants& p){
+    p.setCost(p.getCost() - (p.getCost()*0.15));
+    std::cout<<"decreasing the price of plants! new price: "<<p.getCost()<<std::endl;
 }
 
 CostDown::CostDown(){
@@ -15,6 +11,6 @@ CostDown::CostDown(){
 }
 
 CostDown::~CostDown(){
-    std::cout<<"goodbye costdown type plants:(( "<<std::endl;
+    std::cout<<"CostDown destructor"<<std::endl;
 }
 

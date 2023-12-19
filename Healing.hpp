@@ -10,8 +10,6 @@ class Healing: public Powerups{
         void help_player(Player& p) override;
         Healing();
         ~Healing();
-
-
 };
 
 

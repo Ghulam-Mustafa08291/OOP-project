@@ -42,7 +42,7 @@ SDL_Rect Plants::getposition() {
 }
 
 Plants::Plants()
-:health{100},cost{50} //assuming random values for them now
+:health{100},cost{50}
 {}
 
 Plants::~Plants(){} 

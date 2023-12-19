@@ -5,8 +5,8 @@ void Giant::attack1(){std::cout<<"attack1: cursed technique reversal, RED!"<<std
 
 void Giant::attack2(){std::cout<<"attack2: KURAMAAAAAAAA!"<<std::endl;}
 
-void Giant::attack3(){std::cout<<"attack3: gum gum :shit yourself!!!"<<std::endl;}
+void Giant::attack3(){std::cout<<"attack3: gum gum : gatling gun"<<std::endl;}
 
-Giant::Giant(){std::cout<<"mubarak ho, cerberus hua he"<<std::endl;}
-Giant::~Giant(){std::cout<<"bye cerberus"<<std::endl;}
+Giant::Giant(){std::cout<<"Giant Spawned"<<std::endl;}
+Giant::~Giant(){std::cout<<"Giant destroyed"<<std::endl;}
 

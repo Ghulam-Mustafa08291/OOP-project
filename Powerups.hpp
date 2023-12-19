@@ -16,7 +16,7 @@ class Powerups{
         int get_duration();
         void set_duration(int inp_duration);
         virtual void help_player(Player& p)=0;
-        virtual void decrease_cost(Plants& pl);
+        virtual void help_player(Plants& p)=0;
 
         Powerups();
         ~Powerups();

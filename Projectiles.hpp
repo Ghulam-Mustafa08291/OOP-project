@@ -20,8 +20,8 @@ class Projectiles{
         int get_time();
         void set_time(int t);
 
-        void in_contact(); //this prob will be of return type bool but for now keeping it void
-        void get_position(); //return type void for now, will change it later
+        void in_contact(); 
+        void get_position(); 
         void deal_damage();
 
         Projectiles();

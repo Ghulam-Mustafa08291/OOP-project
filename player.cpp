@@ -20,8 +20,8 @@ Player::Player(){
     this->position.y=20;
     this->position.h=20;
     this->position.w=20;
-    this->equippedWeapon="deezFists";
-    this->equippedArmour="clothesheheh";
+    // this->equippedWeapon="deezFists";
+    // this->equippedArmour="clothesheheh";
 }
 
 void Player::add_to_health(int inp_h){this->health=this->health+inp_h;}
@@ -39,8 +39,8 @@ Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char*
     this->position.y = y;
     this->position.h=20;
     this->position.w=20;
-    this->equippedWeapon = ew;
-    this->equippedArmour = ea;
+    // this->equippedWeapon = ew;
+    // this->equippedArmour = ea;
     }
 
 Player::~Player(){
@@ -113,14 +113,14 @@ void Player::setPosition(int x, int y){
         std::cout<<"position can not be negative"<<std::endl;
     }
 }
-void Player::setEquippedWeapon(char* inp_weapon){
-    this->equippedWeapon=inp_weapon;
-}
+// void Player::setEquippedWeapon(char* inp_weapon){
+//     this->equippedWeapon=inp_weapon;
+// }
 
-void Player::setEquippedArmour(char* inp_armour){
-    this->equippedArmour=inp_armour;
+// void Player::setEquippedArmour(char* inp_armour){
+//     this->equippedArmour=inp_armour;
 
-}
+// }
 bool Player::get_is_alive(){
     if (this->health > 0) return true; else return false;
 }
@@ -135,12 +135,12 @@ int Player::getMagicBeans() {return this->magicBeans;}
 int Player::getArmour() {return this->armour;}
 float Player::getSpeed() {return this->speed;}
 SDL_Rect& Player::getPosition(){return this->position;}
-const char* Player::getEquippedWeapon(){
-    return this->equippedWeapon;
-}
-const char* Player::getEquippedArmour(){
-    return this->equippedArmour;
-}
+// const char* Player::getEquippedWeapon(){
+//     return this->equippedWeapon;
+// }
+// const char* Player::getEquippedArmour(){
+//     return this->equippedArmour;
+// }
 
 // this function controls player movement
 
@@ -194,10 +194,8 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                         std::cout << "Planting shooter plant!" << std::endl;
                     }
                     break;
-                // Add more cases for other keys if needed
             }
             break;
-        // Add more cases for other events if needed
     }
 }
 

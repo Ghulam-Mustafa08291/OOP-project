@@ -37,16 +37,20 @@ void Bosses::set_speed(int s)
     }
 }
 
-void Bosses::get_phase(){std::cout<<"getting the phase!"<<std::endl;}
-void Bosses::trigger_phase(){std::cout<<"triggering the phase rn my king"<<std::endl;}
+int Bosses::get_phase(){
+    std::cout<<"getting the phase!"<<std::endl;
+    return this->phases;
+}
+
+void Bosses::trigger_phase(){std::cout<<"triggering phase " << this->get_phase() << std::endl;}
 
 Bosses::Bosses()
 {
-        std::cout<<"allo mr BOss :)"<<std::endl;
+        std::cout<<"boss spawned"<<std::endl;
         this->health=100;
         this->range=100;
         this->defence=100;
         this->speed=111;
         this->phases=34;
     }
-Bosses::~Bosses(){std::cout<<"bye Bossman"<<std::endl;}
+Bosses::~Bosses(){std::cout<<"boss destroyed"<<std::endl;}

@@ -29,7 +29,7 @@ class Bosses{
 
         
 
-        void get_phase(); //will change return type later on
+        int get_phase(); //will change return type later on
         void trigger_phase();
 
         Bosses();
