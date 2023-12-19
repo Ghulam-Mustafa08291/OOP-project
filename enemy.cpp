@@ -100,6 +100,9 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
 
     int new_x = position.x;  
     int new_y = position.y;  
+    if((this->getPosition()==p.getPosition())==false){
+
+    
 
     if (grid_player_x < grid_enemy_x && isValidMove(position.x - 20, position.y, grid)) {
         new_x -= 20;
@@ -116,6 +119,8 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
     if (isValidMove(new_x, new_y, grid)) { 
         position.x = new_x;
         position.y = new_y;
+    }
+
     }
 }
 
