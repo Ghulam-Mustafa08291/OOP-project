@@ -132,6 +132,34 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
     }
 }
 
+void Enemy::update(Player& p, int grid[64][36], Plants& pl) {
+    if (this->getPosition() == p.getPosition()) {
+        this->deal_damage(p);
+    } else {
+
+        if((*this==pl)==false){ //if the positions do not match then check for collision with the plants
+            if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y-20){
+                this->deal_damage(pl);
+            }
+
+            if(pl.getPosition().x==this->getPosition().x+20 && pl.getPosition().y==this->getPosition().y){
+                this->deal_damage(pl);
+            }
+
+            if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y+20){
+                this->deal_damage(pl);
+            }
+
+            if(pl.getPosition().x==this->getPosition().x-20 && pl.getPosition().y==this->getPosition().y){
+                this->deal_damage(pl);
+            }
+
+
+        }
+        go_to_player(p, grid);
+    }
+}
+
 void Enemy::update(Player& p, int grid[64][36]) {
     if (position == p.getPosition()) {
         this->deal_damage(p);
@@ -139,7 +167,6 @@ void Enemy::update(Player& p, int grid[64][36]) {
         go_to_player(p, grid);
     }
 }
-
 
 
 

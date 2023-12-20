@@ -277,9 +277,10 @@ while (!quit) {
                     // }
 
                     // Create a new enemy every 100 ticks
-                    if (time % 100 == 0) {
+                    if (time % 1000 == 0) {
                         // Create a new enemy on the heap
                         Enemy* newEnemy = new Enemy(i, j);
+                        //time=0;
 
                         // Add the new enemy to the vector
                         enemies.push_back(newEnemy);
@@ -326,34 +327,44 @@ while (!quit) {
 
         // Update and render existing enemies
         for (int i=0;i<enemies.size();i++) {
+            
             // Update enemy logic (e.g., chasing the player)
             // For now, assuming a simple update function in the Enemy class
-            enemies[i]->update(player,grid);
-
-            // Render enemy on the grid
-            // For now, assuming a simple render function in the Enemy class
-            SDL_Rect enemyRect= enemies[i]->getPosition();
-            SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
-        }
-
-        for (int i=0;i<PlantObject.size();i++) {
-            // Render plant on the grid
-            // For now, assuming a simple render function in the Plant class
+            if(i<PlantObject.size()){
             SDL_Rect plantRect= PlantObject[i]->getPosition();
             SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-        }
-
-
-        for (int i=0;i<enemies.size();i++) {
-            // Update enemy logic (e.g., chasing the player)
-            // For now, assuming a simple update function in the Enemy class
-            enemies[i]->update(player,grid);
+            enemies[i]->update(player,grid,*PlantObject[i]);
+            }
+            else{
+                enemies[i]->update(player,grid);
+            }
+            
+           
 
             // Render enemy on the grid
             // For now, assuming a simple render function in the Enemy class
             SDL_Rect enemyRect= enemies[i]->getPosition();
             SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
         }
+
+        // for (int i=0;i<PlantObject.size();i++) {
+        //     // Render plant on the grid
+        //     // For now, assuming a simple render function in the Plant class
+        //     SDL_Rect plantRect= PlantObject[i]->getPosition();
+        //     SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+        
+
+
+        // for (int i=0;i<enemies.size();i++) {
+        //     // Update enemy logic (e.g., chasing the player)
+        //     // For now, assuming a simple update function in the Enemy class
+        //     enemies[i]->update(player,grid);
+
+        //     // Render enemy on the grid
+        //     // For now, assuming a simple render function in the Enemy class
+        //     SDL_Rect enemyRect= enemies[i]->getPosition();
+        //     SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        // }
 
         SDL_Rect playerRect = player.getPosition();
         // SDL_Rect enemyRect= enemy.getPosition();

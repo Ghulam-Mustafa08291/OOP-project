@@ -26,6 +26,7 @@ class Enemy{
         void setPosition(int x,int y);
         void deal_damage(Player& p);
         void deal_damage(Plants& pl);
+        void update(Player& p, int grid[64][36],Plants& pl);
         void update(Player& p, int grid[64][36]);
         bool isValidMove(int x, int y, int grid[64][36]);
 
