@@ -8,14 +8,14 @@
 #include "enemy.hpp"
 #include "shooter.hpp"
 
-int changeMap (int* g[64][36], int* m[64][36]) {
-    for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 36; j++) {
-            g[i][j] = m[i][j];
-        }
-    }
-    return 0;
-}
+// int changeMap (int* g[64][36], int* m[64][36]) {
+//     for (int i = 0; i < 64; i++) {
+//         for (int j = 0; j < 36; j++) {
+//             g[i][j] = m[i][j];
+//         }
+//     }
+//     return 0;
+// }
 
 std::vector<Enemy*> enemies;
 

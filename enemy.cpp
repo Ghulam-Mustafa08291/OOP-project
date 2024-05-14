@@ -110,24 +110,24 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
     int new_y = position.y;  
     if((*this==p)==false){
 
-    
+        
 
-    if (grid_player_x < grid_enemy_x && isValidMove(position.x - 20, position.y, grid)) {
-        new_x -= 20;
-    } else if (grid_player_x > grid_enemy_x && isValidMove(position.x + 20, position.y, grid)) {
-        new_x += 20;
-    }
+        if (grid_player_x < grid_enemy_x && isValidMove(position.x - 20, position.y, grid)) {
+            new_x -= 20;
+        } else if (grid_player_x > grid_enemy_x && isValidMove(position.x + 20, position.y, grid)) {
+            new_x += 20;
+        }
 
-    if (grid_player_y < grid_enemy_y && isValidMove(position.x, position.y - 20, grid)) {
-        new_y -= 20;
-    } else if (grid_player_y > grid_enemy_y && isValidMove(position.x, position.y + 20, grid)) {
-        new_y += 20;
-    }
+        if (grid_player_y < grid_enemy_y && isValidMove(position.x, position.y - 20, grid)) {
+            new_y -= 20;
+        } else if (grid_player_y > grid_enemy_y && isValidMove(position.x, position.y + 20, grid)) {
+            new_y += 20;
+        }
 
-    if (isValidMove(new_x, new_y, grid)) { 
-        position.x = new_x;
-        position.y = new_y;
-    }
+        if (isValidMove(new_x, new_y, grid)) { 
+            position.x = new_x;
+            position.y = new_y;
+        }
 
     }
 }
