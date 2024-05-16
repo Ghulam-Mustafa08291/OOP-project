@@ -158,7 +158,19 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
             int gridY = currentY / BLOCK_SIZE;
 
             // Check the key pressed
+            Weapons ki_blast;
             switch (event.key.keysym.sym) {
+                case SDLK_z:
+                    if(direction_facing=="down"){
+                        ki_blast.weapon_position.x=gridX;
+                        ki_blast.weapon_position.y=gridY;
+                        while(ki_blast.weapon_position.y<=63){
+                            ki_blast.weapon_position.y+=1;//y increases going downwards
+                            grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y]=4; //4 denotes a weapon on grid
+                        }
+                    }
+                    break;
+
                 case SDLK_UP:
                     // Check if the grid position above the player is not blocked
                     if (gridY - 1 >= 0 && grid[gridX][gridY - 1] != 1) {

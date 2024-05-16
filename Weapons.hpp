@@ -10,7 +10,9 @@ class Weapons{
     int range;
     int attack_speed;
 
+
     public:
+        SDL_Rect weapon_position;
         int get_damage();
         void set_damage(int d);
 

@@ -269,6 +269,7 @@ while (!quit) {
                 }
                 else if (grid[i][j] == 2) {
                     SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
+                    
                     // if (time % 120 == 0) {
                     //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color
                     //     grid[i + 1][j] = 4;
@@ -293,6 +294,10 @@ while (!quit) {
                     // Shooter* shooter_plant = new Shooter{i,j};//have to push in vector
                     // SDL_Rect plantRect = shooter_plant->getposition();
                     // SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+                }
+                else if(grid[i][j]==4){
+                    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);//for red kiblast
+
                 }
                 // else if (grid[i][j] == 4) {
                 //     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); // Red color, enemy
