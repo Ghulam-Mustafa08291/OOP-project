@@ -236,6 +236,7 @@ while (!quit) {
                 Shooter* shooter_plant = new Shooter{player.getPosition().x,player.getPosition().y};
                 PlantObject.push_back(shooter_plant);
             }
+            
             player.move(e, grid); // Pass the event to the player's move function
         }
         // Handle other types of events here if needed

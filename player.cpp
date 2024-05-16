@@ -164,6 +164,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     if (gridY - 1 >= 0 && grid[gridX][gridY - 1] != 1) {
                         position.y -= BLOCK_SIZE;
                         std::cout << "Moving player up" << std::endl;
+                        direction_facing="up";
                     }
                     break;
                 case SDLK_DOWN:
@@ -171,6 +172,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     if (gridY + 1 < 36 && grid[gridX][gridY + 1] != 1) {
                         position.y += BLOCK_SIZE;
                         std::cout << "Moving player down" << std::endl;
+                        direction_facing="down";
                     }
                     break;
                 case SDLK_LEFT:
@@ -178,6 +180,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     if (gridX - 1 >= 0 && grid[gridX - 1][gridY] != 1) {
                         position.x -= BLOCK_SIZE;
                         std::cout << "Moving player left" << std::endl;
+                        direction_facing="left";
                     }
                     break;
                 case SDLK_RIGHT:
@@ -185,6 +188,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                     if (gridX + 1 < 64 && grid[gridX + 1][gridY] != 1) {
                         position.x += BLOCK_SIZE;
                         std::cout << "Moving player right" << std::endl;
+                        direction_facing="right";
                     }
                     break;
                 case SDLK_q:

@@ -7,6 +7,8 @@
 #include <vector>
 #include "Armour.hpp"
 #include "Weapons.hpp"
+#include <string>  // Include the string header
+
 
 //health,attack,gold,magicbeans,armour,speed,position,equipped weapon,equipped armour
 
@@ -28,6 +30,7 @@ class Player{
 
     public:
         //getters,setters,constructors,destructors
+        std::string direction_facing;
         void setHealth(int h);
         void setAttack(int a);
         void setGold(int g);
