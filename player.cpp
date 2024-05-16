@@ -159,14 +159,19 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
 
             // Check the key pressed
             Weapons ki_blast;
+            // int old_grid_state;
             switch (event.key.keysym.sym) {
                 case SDLK_z:
                     if(direction_facing=="down"){
                         ki_blast.weapon_position.x=gridX;
                         ki_blast.weapon_position.y=gridY;
                         while(ki_blast.weapon_position.y<=63){
+                            // old_grid_state=grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y];
                             ki_blast.weapon_position.y+=1;//y increases going downwards
                             grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y]=4; //4 denotes a weapon on grid
+                            grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y-1]=0;
+                            // SDL_Delay(0.01);
+
                         }
                     }
                     break;
