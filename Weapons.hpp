@@ -2,6 +2,7 @@
 #define WEAPONS_HPP
 #include <SDL.h>
 #include <SDL_image.h>
+#include <string>
 
 
 
@@ -15,7 +16,8 @@ class Weapons{
         SDL_Rect weapon_position;
         float weapon_position_x;
         float weapon_position_y;
-        
+        std::string weapon_direction;
+
         float speed;
         int get_damage();
         void set_damage(int d);
