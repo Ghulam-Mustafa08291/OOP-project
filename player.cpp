@@ -50,6 +50,32 @@ void Player::updateKiBlasts(int grid[64][36]) {
                 it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
             }
         }
+        else if((*it)->weapon_direction=="up"){
+            (*it)->weapon_position_y -= (*it)->speed;
+            
+            (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
+            (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+            int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
+            int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
+            std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
+            if (gridY < 36 && gridY>=0) {
+                grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
+
+                if (gridY + 1 >= 0) {
+                    grid[gridX][gridY + 1] = 0; // Clear the previous position
+                }
+
+                ++it;
+            } else {
+                delete *it; // Free the memory
+                it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
+            }
+
+        }
+
+
+
+
     }
 }
 
@@ -201,6 +227,45 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                         ki_blast->weapon_position.h = BLOCK_SIZE;
                         ki_blast->speed = 0.1f; // Set the speed of the ki_blast
                         ki_blast->weapon_direction="down";
+
+                        active_ki_blasts.push_back(ki_blast);
+                    }
+                    else if(direction_facing=="left"){
+                        Weapons* ki_blast = new Weapons; // Dynamic allocation  
+                        ki_blast->weapon_position.x = currentX;
+                        ki_blast->weapon_position.y = currentY;
+                        ki_blast->weapon_position_x=static_cast<float>(currentX);
+                        ki_blast->weapon_position_y=static_cast<float>(currentY);
+                        ki_blast->weapon_position.w = BLOCK_SIZE;
+                        ki_blast->weapon_position.h = BLOCK_SIZE;
+                        ki_blast->speed = 0.1f; // Set the speed of the ki_blast
+                        ki_blast->weapon_direction="left";
+
+                        active_ki_blasts.push_back(ki_blast);
+                    }
+                    else if(direction_facing=="right"){
+                        Weapons* ki_blast = new Weapons; // Dynamic allocation  
+                        ki_blast->weapon_position.x = currentX;
+                        ki_blast->weapon_position.y = currentY;
+                        ki_blast->weapon_position_x=static_cast<float>(currentX);
+                        ki_blast->weapon_position_y=static_cast<float>(currentY);
+                        ki_blast->weapon_position.w = BLOCK_SIZE;
+                        ki_blast->weapon_position.h = BLOCK_SIZE;
+                        ki_blast->speed = 0.1f; // Set the speed of the ki_blast
+                        ki_blast->weapon_direction="right";
+
+                        active_ki_blasts.push_back(ki_blast);
+                    }
+                    else if(direction_facing=="up"){
+                        Weapons* ki_blast = new Weapons; // Dynamic allocation  
+                        ki_blast->weapon_position.x = currentX;
+                        ki_blast->weapon_position.y = currentY;
+                        ki_blast->weapon_position_x=static_cast<float>(currentX);
+                        ki_blast->weapon_position_y=static_cast<float>(currentY);
+                        ki_blast->weapon_position.w = BLOCK_SIZE;
+                        ki_blast->weapon_position.h = BLOCK_SIZE;
+                        ki_blast->speed = 0.1f; // Set the speed of the ki_blast
+                        ki_blast->weapon_direction="up";
 
                         active_ki_blasts.push_back(ki_blast);
                     }
