@@ -72,6 +72,49 @@ void Player::updateKiBlasts(int grid[64][36]) {
             }
 
         }
+        else if((*it)->weapon_direction=="left"){
+            (*it)->weapon_position_x -= (*it)->speed;
+            
+            (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
+            (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+            int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
+            int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
+            std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
+            if (gridX>=0 && gridX<64) {
+                grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
+
+                if (gridX + 1 >= 0) {
+                    grid[gridX+1][gridY] = 0; // Clear the previous position
+                }
+
+                ++it;
+            } else {
+                delete *it; // Free the memory
+                it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
+            }
+        }
+
+        else if((*it)->weapon_direction=="right"){
+            (*it)->weapon_position_x += (*it)->speed;
+            
+            (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
+            (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+            int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
+            int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
+            std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
+            if (gridX>=0 && gridX<64) {
+                grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
+
+                if (gridX - 1 >= 0) {
+                    grid[gridX-1][gridY] = 0; // Clear the previous position
+                }
+
+                ++it;
+            } else {
+                delete *it; // Free the memory
+                it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
+            }
+        }
 
 
 
