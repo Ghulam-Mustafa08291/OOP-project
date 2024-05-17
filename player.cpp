@@ -4,6 +4,8 @@
 #include "shooter.hpp"
 #include <iostream>
 #include <vector>
+#include <cstdlib> // or #include <stdlib.h> in C
+#include <ctime>   // for seeding the random number generator
 // std::vector<Plants*> PlantObject; //will store all the plant type objects
 
 
@@ -22,6 +24,31 @@ Player::Player(){
     this->position.w=20;
     // this->equippedWeapon="deezFists";
     // this->equippedArmour="clothesheheh";
+}
+void Player::updateKiBlasts(int grid[64][36]) {
+    const int BLOCK_SIZE = 20;
+
+    for (auto it = active_ki_blasts.begin(); it != active_ki_blasts.end(); ) {
+        (*it)->weapon_position_y += (*it)->speed;
+        
+        (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
+        (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+        int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
+        int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
+        std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
+        if (gridY < 36) {
+            grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
+
+            if (gridY - 1 >= 0) {
+                grid[gridX][gridY - 1] = 0; // Clear the previous position
+            }
+
+            ++it;
+        } else {
+            delete *it; // Free the memory
+            it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
+        }
+    }
 }
 
 void Player::add_to_health(int inp_h){this->health=this->health+inp_h;}
@@ -45,6 +72,9 @@ Player::Player(int h, int a, int g, int mb, int ar, float s, int x, int y, char*
 
 Player::~Player(){
     std::cout<<"Goodbye Player!"<<std::endl;
+    for (Weapons* ki_blast : active_ki_blasts) {
+        delete ki_blast;
+    }
 }
 
 void Player::setHealth(int h) 
@@ -143,7 +173,6 @@ SDL_Rect& Player::getPosition(){return this->position;}
 // }
 
 // this function controls player movement
-
 void Player::move(SDL_Event& event, int grid[64][36]) {
     const int BLOCK_SIZE = 20; // Size of each block in the grid
 
@@ -158,21 +187,19 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
             int gridY = currentY / BLOCK_SIZE;
 
             // Check the key pressed
-            Weapons ki_blast;
-            // int old_grid_state;
             switch (event.key.keysym.sym) {
                 case SDLK_z:
-                    if(direction_facing=="down"){
-                        ki_blast.weapon_position.x=gridX;
-                        ki_blast.weapon_position.y=gridY;
-                        while(ki_blast.weapon_position.y<=63){
-                            // old_grid_state=grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y];
-                            ki_blast.weapon_position.y+=1;//y increases going downwards
-                            grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y]=4; //4 denotes a weapon on grid
-                            grid[ki_blast.weapon_position.x][ki_blast.weapon_position.y-1]=0;
-                            // SDL_Delay(0.01);
+                    if (direction_facing == "down") {
+                        Weapons* ki_blast = new Weapons; // Dynamic allocation  
+                        ki_blast->weapon_position.x = currentX;
+                        ki_blast->weapon_position.y = currentY;
+                        ki_blast->weapon_position_x=static_cast<float>(currentX);
+                        ki_blast->weapon_position_y=static_cast<float>(currentY);
+                        ki_blast->weapon_position.w = BLOCK_SIZE;
+                        ki_blast->weapon_position.h = BLOCK_SIZE;
+                        ki_blast->speed = 0.1f; // Set the speed of the ki_blast
 
-                        }
+                        active_ki_blasts.push_back(ki_blast);
                     }
                     break;
 

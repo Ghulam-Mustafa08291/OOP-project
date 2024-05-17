@@ -38,6 +38,7 @@ void Weapons::set_attack_speed(int s)
 Weapons::Weapons(){
     std::cout<<"Weapon created!"<<std::endl;
 
+
 }
 
 Weapons::~Weapons(){

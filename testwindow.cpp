@@ -25,6 +25,8 @@ int main(int argc, char* args[]) {
     // Initializing SDL
 
     Player player;
+    Enemy* newEnemy = new Enemy(32,23);
+
     
     // Enemy enemy;
     std::vector<Plants*> PlantObject; //will store all the plant type objects
@@ -236,8 +238,9 @@ while (!quit) {
                 Shooter* shooter_plant = new Shooter{player.getPosition().x,player.getPosition().y};
                 PlantObject.push_back(shooter_plant);
             }
-            
+            // player.updateKiBlasts(grid);
             player.move(e, grid); // Pass the event to the player's move function
+            
         }
         // Handle other types of events here if needed
     }
@@ -253,7 +256,7 @@ while (!quit) {
     if (startGame) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
-
+        player.updateKiBlasts(grid);
         
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {
@@ -280,12 +283,12 @@ while (!quit) {
 
                     // Create a new enemy every 100 ticks
                     if (time % 1000 == 0) {
-                        // Create a new enemy on the heap
-                        Enemy* newEnemy = new Enemy(i, j);
-                        //time=0;
-
-                        // Add the new enemy to the vector
-                        enemies.push_back(newEnemy);
+                        // // Create a new enemy on the heap
+                        // Enemy* newEnemy = new Enemy(i, j);
+                        // //time=0;
+                        newEnemy->go_to_player(player,grid);
+                        // // Add the new enemy to the vector
+                        // enemies.push_back(newEnemy);
                     }
                 }
                 else if (grid[i][j] == 3) { //plants will be stationary
@@ -332,33 +335,36 @@ while (!quit) {
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
         // Update and render existing enemies
-        for (int i=0;i<enemies.size();i++) {
+        // newEnemy->go_to_player(player,grid);
+        SDL_Rect enemyRect= newEnemy->getPosition();
+        SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+        // for (int i=0;i<enemies.size();i++) {
             
             // Update enemy logic (e.g., chasing the player)
-            // For now, assuming a simple update function in the Enemy class
-            if(i<PlantObject.size()){
-            SDL_Rect plantRect= PlantObject[i]->getPosition();
-            SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-            enemies[i]->update(player,grid,*PlantObject[i]);
-            }
-            else{
-                enemies[i]->update(player,grid);
-            }
+            // // For now, assuming a simple update function in the Enemy class
+            // if(i<PlantObject.size()){
+            // SDL_Rect plantRect= PlantObject[i]->getPosition();
+            // SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
+            // enemies[i]->update(player,grid,*PlantObject[i]);
+            // }
+            // else{
+            //     enemies[i]->go_to_player(player,grid);
+            // }
             
            
 
             // Render enemy on the grid
             // For now, assuming a simple render function in the Enemy class
-            SDL_Rect enemyRect= enemies[i]->getPosition();
-            SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
-        }
+            
+        // }
 
         // for (int i=0;i<PlantObject.size();i++) {
         //     // Render plant on the grid
         //     // For now, assuming a simple render function in the Plant class
         //     SDL_Rect plantRect= PlantObject[i]->getPosition();
         //     SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-        
+        //     newEnemy->update(player,grid,*PlantObject[i]);
+        // }
 
 
         // for (int i=0;i<enemies.size();i++) {
@@ -400,10 +406,10 @@ while (!quit) {
         PlantObject[i] = nullptr;
     }
 
-    for (int i=0;i<enemies.size();i++) {
-        delete enemies[i];
-        enemies[i] = nullptr;
-    }
+    // for (int i=0;i<enemies.size();i++) {
+    //     delete enemies[i];
+    //     enemies[i] = nullptr;
+    // }
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 

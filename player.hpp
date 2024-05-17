@@ -31,6 +31,8 @@ class Player{
     public:
         //getters,setters,constructors,destructors
         std::string direction_facing;
+        void updateKiBlasts(int grid[64][36]);
+        std::vector<Weapons*> active_ki_blasts;
         void setHealth(int h);
         void setAttack(int a);
         void setGold(int g);

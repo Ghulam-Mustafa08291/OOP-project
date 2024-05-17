@@ -13,6 +13,10 @@ class Weapons{
 
     public:
         SDL_Rect weapon_position;
+        float weapon_position_x;
+        float weapon_position_y;
+        
+        float speed;
         int get_damage();
         void set_damage(int d);
 
