@@ -24,6 +24,7 @@ void Enemy::setHealth(int h){
         this->health=h;
     }
     else{
+        this->health=h;
         std::cout<<"the health must be more than 0"<<std::endl;
     }
 }
@@ -127,6 +128,7 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
         if (isValidMove(new_x, new_y, grid)) { 
             position.x = new_x;
             position.y = new_y;
+            std::cout<<"enemy x pos: "<<this->getPosition().x<<" enemy y pos: "<<this->getPosition().y<<std::endl;
         }
 
     }

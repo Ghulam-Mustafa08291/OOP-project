@@ -15,8 +15,9 @@ class Weapons{
 
     public:
 
-        bool check_weapon_collision_enemy(Enemy& enemy);
-        void weapon_damage_enemy(Enemy& enemy);
+        bool check_weapon_collision_enemy(Enemy* enemy);
+        void weapon_damage_enemy(Enemy* enemy,int grid[64][36]);
+        void kill_enemy(Enemy* enemy,int grid[64][36]);
 
         SDL_Rect weapon_position;
         float weapon_position_x;

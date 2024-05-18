@@ -46,8 +46,8 @@ Weapons::~Weapons(){
 }
 
 
-bool Weapons::check_weapon_collision_enemy(Enemy& enemy){
-    if(enemy.getPosition().x==this->weapon_position.x && enemy.getPosition().y==this->weapon_position.y){
+bool Weapons::check_weapon_collision_enemy(Enemy* enemy){
+    if(enemy->getPosition().x==this->weapon_position.x && enemy->getPosition().y==this->weapon_position.y){
         return true;
         std::cout<<"the weapon collided with the enemy"<<std::endl;
     }
@@ -55,7 +55,16 @@ bool Weapons::check_weapon_collision_enemy(Enemy& enemy){
         return false;
     }
 }
-void Weapons::weapon_damage_enemy(Enemy& enemy){
-    enemy.setHealth(enemy.getHealth()-this->get_damage());
-    std::cout<<"the enemy was damaged"<<std::endl;
+void Weapons::kill_enemy(Enemy* enemy,int grid[64][36]){
+    grid[enemy->getPosition().x][enemy->getPosition().y]=0;
+}
+void Weapons::weapon_damage_enemy(Enemy* enemy,int grid[64][36]){
+    if(enemy->getHealth()<=0){
+        kill_enemy(enemy,grid);
+    }
+    else{
+        enemy->setHealth(enemy->getHealth()-this->get_damage());
+        std::cout<<"the enemy was damaged"<<std::endl;
+    }
+    
 }
