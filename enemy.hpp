@@ -5,6 +5,9 @@
 #include <SDL_image.h>
 #include "player.hpp"
 
+
+class Player;
+
 class Enemy{
     private:
         int health;

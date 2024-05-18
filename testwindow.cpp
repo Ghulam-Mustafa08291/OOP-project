@@ -256,7 +256,7 @@ while (!quit) {
     if (startGame) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
-        player.updateKiBlasts(grid);
+        player.updateKiBlasts(grid,*newEnemy);
         
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {

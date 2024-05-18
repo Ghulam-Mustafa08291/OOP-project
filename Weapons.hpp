@@ -3,9 +3,10 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include "enemy.hpp"
 
 
-
+class Enemy;
 class Weapons{
     int damage;
     int range;
@@ -13,6 +14,10 @@ class Weapons{
 
 
     public:
+
+        bool check_weapon_collision_enemy(Enemy& enemy);
+        void weapon_damage_enemy(Enemy& enemy);
+
         SDL_Rect weapon_position;
         float weapon_position_x;
         float weapon_position_y;

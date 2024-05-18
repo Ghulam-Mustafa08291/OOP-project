@@ -1,6 +1,5 @@
 #include "player.hpp"
-#include "plants.hpp"
-#include "enemy.hpp"
+
 #include "shooter.hpp"
 #include <iostream>
 #include <vector>
@@ -8,7 +7,7 @@
 #include <ctime>   // for seeding the random number generator
 // std::vector<Plants*> PlantObject; //will store all the plant type objects
 
-
+class Enemy;
 //below are the setters and constructor and destructor
 Player::Player(){
     this->health=100;
@@ -25,7 +24,7 @@ Player::Player(){
     // this->equippedWeapon="deezFists";
     // this->equippedArmour="clothesheheh";
 }
-void Player::updateKiBlasts(int grid[64][36]) {
+void Player::updateKiBlasts(int grid[64][36],Enemy& enemy) {
     const int BLOCK_SIZE = 20;
 
     for (auto it = active_ki_blasts.begin(); it != active_ki_blasts.end(); ) {

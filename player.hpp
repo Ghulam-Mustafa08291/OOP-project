@@ -7,13 +7,15 @@
 #include <vector>
 #include "Armour.hpp"
 #include "Weapons.hpp"
+#include "enemy.hpp"
 #include <string>  // Include the string header
 
 
 //health,attack,gold,magicbeans,armour,speed,position,equipped weapon,equipped armour
 
 // std::vector<Plants*> plantObjects; //will store objects pf plant and its inherited data types here
-
+class Weapons; //did the forward declaration
+class Enemy;
 class Player{
     private:
         int health;
@@ -31,7 +33,7 @@ class Player{
     public:
         //getters,setters,constructors,destructors
         std::string direction_facing;
-        void updateKiBlasts(int grid[64][36]);
+        void updateKiBlasts(int grid[64][36],Enemy& ene);
         std::vector<Weapons*> active_ki_blasts;
         void setHealth(int h);
         void setAttack(int a);
