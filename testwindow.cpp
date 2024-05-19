@@ -113,6 +113,7 @@ int main(int argc, char* args[]) {
 
     SDL_Texture* enemyTexture = SDL_CreateTextureFromSurface(renderer, enemySurface);
     SDL_FreeSurface(enemySurface); // Free the surface as the texture is created
+    newEnemy->texture=enemyTexture;
 
     SDL_Texture* plantTexture = SDL_CreateTextureFromSurface(renderer, plantSurface);
     SDL_FreeSurface(plantSurface); // Free the surface as the texture is created
@@ -269,6 +270,7 @@ while (!quit) {
                 } 
                 else if (grid[i][j] == 0) {
                     SDL_SetRenderDrawColor(renderer, 139, 69, 19, 255); // Brown color
+                    // std::cout<<"rendering a brown block1 digit on grid: "<<grid[i][j]<<std::endl;
                 }
                 else if (grid[i][j] == 2) {
                     SDL_SetRenderDrawColor(renderer, 128, 69, 128, 255); // Purple color
@@ -300,6 +302,7 @@ while (!quit) {
                 }
                 else if(grid[i][j]==4){
                     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);//for red kiblast
+                    // std::cout<<"rendering ki blast! digit on grid: "<<grid[i][j]<<std::endl;
 
                 }
                 // else if (grid[i][j] == 4) {

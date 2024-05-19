@@ -18,6 +18,7 @@ class Enemy{
     
     public:
         //getters,setters,constructors,destructors
+        SDL_Texture* texture;
         void setHealth(int h);
         void setSpeed(int s);
         void setDamage(int d);

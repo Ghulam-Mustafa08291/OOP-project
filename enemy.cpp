@@ -25,7 +25,8 @@ void Enemy::setHealth(int h){
     }
     else{
         this->health=h;
-        std::cout<<"the health must be more than 0"<<std::endl;
+        std::cout<<"the enemy health must be more than 0"<<std::endl;
+        std::cout<<"the new enemy health: "<<h<<std::endl;
     }
 }
 

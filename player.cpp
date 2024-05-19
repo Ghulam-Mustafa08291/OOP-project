@@ -24,44 +24,48 @@ Player::Player(){
     // this->equippedWeapon="deezFists";
     // this->equippedArmour="clothesheheh";
 }
-void Player::updateKiBlasts(int grid[64][36],Enemy* enemy) {
+void Player::updateKiBlasts(int grid[64][36], Enemy* enemy) {
     const int BLOCK_SIZE = 20;
 
-    for (auto it = active_ki_blasts.begin(); it != active_ki_blasts.end(); ) {
-        if((*it)->check_weapon_collision_enemy(enemy)==true){
-            (*it)->weapon_damage_enemy(enemy,grid);
-        }
-        else{
-            if((*it)->weapon_direction=="down"){
+    for (auto it = active_ki_blasts.begin(); it != active_ki_blasts.end();) {
+        if ((*it)->check_weapon_collision_enemy(enemy) == true && (*it)->weapon_direction!="NULL") {
+            (*it)->weapon_damage_enemy(enemy, grid);
+            delete *it; // Free the memory
+            std::cout<<"delted blast hehe, now imma remove from vector!"<<std::endl;
+            it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
+        } else {
+            if ((*it)->weapon_direction == "down") {
                 (*it)->weapon_position_y += (*it)->speed;
-                
-                (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
-                (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+
+                (*it)->weapon_position.y = static_cast<int>((*it)->weapon_position_y);
+                (*it)->weapon_position.x = static_cast<int>((*it)->weapon_position_x);
                 int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
                 int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
-                std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
+                std::cout << "speed: " << (*it)->speed << " weapon_position.y=" << (*it)->weapon_position.y << " gridX=" << gridX << " gridY=" << gridY << std::endl;
                 if (gridY < 36) {
                     grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
 
                     if (gridY - 1 >= 0) {
                         grid[gridX][gridY - 1] = 0; // Clear the previous position
                     }
+                    // if(gridY+1<=63 && grid[gridX][gridY+1]==4){
+                    //     std::cout<<"in updatekiblast function, bruh enemy ilnfront"<<std::endl;
+                    // }
 
                     ++it;
                 } else {
                     delete *it; // Free the memory
                     it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
                 }
-            }
-            else if((*it)->weapon_direction=="up"){
+            } else if ((*it)->weapon_direction == "up") {
                 (*it)->weapon_position_y -= (*it)->speed;
-                
-                (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
-                (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+
+                (*it)->weapon_position.y = static_cast<int>((*it)->weapon_position_y);
+                (*it)->weapon_position.x = static_cast<int>((*it)->weapon_position_x);
                 int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
                 int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
-                std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
-                if (gridY < 36 && gridY>=0) {
+                std::cout << "speed: " << (*it)->speed << " weapon_position.y=" << (*it)->weapon_position.y << " gridX=" << gridX << " gridY=" << gridY << std::endl;
+                if (gridY < 36 && gridY >= 0) {
                     grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
 
                     if (gridY + 1 >= 0) {
@@ -73,21 +77,19 @@ void Player::updateKiBlasts(int grid[64][36],Enemy* enemy) {
                     delete *it; // Free the memory
                     it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
                 }
-
-            }
-            else if((*it)->weapon_direction=="left"){
+            } else if ((*it)->weapon_direction == "left") {
                 (*it)->weapon_position_x -= (*it)->speed;
-                
-                (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
-                (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+
+                (*it)->weapon_position.y = static_cast<int>((*it)->weapon_position_y);
+                (*it)->weapon_position.x = static_cast<int>((*it)->weapon_position_x);
                 int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
                 int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
-                std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
-                if (gridX>=0 && gridX<64) {
+                std::cout << "speed: " << (*it)->speed << " weapon_position.y=" << (*it)->weapon_position.y << " gridX=" << gridX << " gridY=" << gridY << std::endl;
+                if (gridX >= 0 && gridX < 64) {
                     grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
 
                     if (gridX + 1 >= 0) {
-                        grid[gridX+1][gridY] = 0; // Clear the previous position
+                        grid[gridX + 1][gridY] = 0; // Clear the previous position
                     }
 
                     ++it;
@@ -95,34 +97,29 @@ void Player::updateKiBlasts(int grid[64][36],Enemy* enemy) {
                     delete *it; // Free the memory
                     it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
                 }
-            }
-
-            else if((*it)->weapon_direction=="right"){
+            } else if ((*it)->weapon_direction == "right") {
                 (*it)->weapon_position_x += (*it)->speed;
-                
-                (*it)->weapon_position.y=static_cast<int>((*it)->weapon_position_y);
-                (*it)->weapon_position.x=static_cast<int>((*it)->weapon_position_x);
+
+                (*it)->weapon_position.y = static_cast<int>((*it)->weapon_position_y);
+                (*it)->weapon_position.x = static_cast<int>((*it)->weapon_position_x);
                 int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
                 int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
-                std::cout<<"speed: "<<(*it)->speed<<" weapon_position.y="<<(*it)->weapon_position.y<<" gridX="<<gridX<<" gridY="<<gridY<<std::endl;
-                if (gridX>=0 && gridX<64) {
+                std::cout << "speed: " << (*it)->speed << " weapon_position.y=" << (*it)->weapon_position.y << " gridX=" << gridX << " gridY=" << gridY << std::endl;
+                if (gridX >= 0 && gridX < 64) {
                     grid[gridX][gridY] = 4; // 4 denotes a weapon on the grid
 
                     if (gridX - 1 >= 0) {
-                        grid[gridX-1][gridY] = 0; // Clear the previous position
+                        grid[gridX - 1][gridY] = 0; // Clear the previous position
                     }
 
                     ++it;
                 } else {
                     delete *it; // Free the memory
+                    std::cout<<"delted blast hehe, now imma remove from vector!"<<std::endl;
                     it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
                 }
             }
         }
-
-
-
-
     }
 }
 
