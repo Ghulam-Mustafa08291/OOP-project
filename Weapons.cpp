@@ -116,14 +116,14 @@ void Weapons::weapon_damage_enemy(Enemy* enemy, int grid[64][36]) {
         std::cerr << "Error: enemy is nullptr!" << std::endl;
         return;
     }
-
+    enemy->setHealth(enemy->getHealth() - this->get_damage());
     if (enemy->getHealth() <= 0) {
         std::cout << "Will call the kill_enemy method now" << std::endl;
         kill_enemy(enemy, grid);
     } else {
         std::cout << "In weapon_damage_enemy method, enemy->getHealth()=" << enemy->getHealth() << ", this->get_damage()=" << this->get_damage() << std::endl;
         std::cout << "In weapon_damage_enemy method, enemy->getHealth() - this->get_damage()=" << enemy->getHealth() - this->get_damage() << std::endl;
-        enemy->setHealth(enemy->getHealth() - this->get_damage());
+        // enemy->setHealth(enemy->getHealth() - this->get_damage());
         std::cout << "The enemy was damaged" << std::endl;
          int weaponPosX = this->weapon_position.x/20;
         int weaponPosY = this->weapon_position.y/20;
@@ -131,7 +131,7 @@ void Weapons::weapon_damage_enemy(Enemy* enemy, int grid[64][36]) {
         std::cout << "In the weapon_damage_enemy method, " << "this->weapon_position.x=" << weaponPosX << ", this->weapon_position.y=" << weaponPosY << std::endl;
 
         if (weaponPosX >= 0 && weaponPosX < 64 && weaponPosY >= 0 && weaponPosY < 36) {
-            grid[weaponPosX][weaponPosY] = 0;
+            // grid[weaponPosX][weaponPosY] = 0;
             this->weapon_direction="NULL";
             std::cout<<"In the weapon_damage_enemy method, weapon_direction: "<<this->weapon_direction<<std::endl;
         }

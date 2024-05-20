@@ -102,36 +102,38 @@ void Enemy::deal_damage(Player& p){
 
 
 void Enemy::go_to_player(Player& p, int grid[64][36]) {
-    int grid_player_x = p.getPosition().x / 20;
-    int grid_player_y = p.getPosition().y / 20;
+    if(this->getHealth()>0){
+        int grid_player_x = p.getPosition().x / 20;
+        int grid_player_y = p.getPosition().y / 20;
 
-    int grid_enemy_x = position.x / 20;
-    int grid_enemy_y = position.y / 20;
+        int grid_enemy_x = position.x / 20;
+        int grid_enemy_y = position.y / 20;
 
-    int new_x = position.x;  
-    int new_y = position.y;  
-    if((*this==p)==false){
+        int new_x = position.x;  
+        int new_y = position.y;  
+        if((*this==p)==false){
 
-        
+            
 
-        if (grid_player_x < grid_enemy_x && isValidMove(position.x - 20, position.y, grid)) {
-            new_x -= 20;
-        } else if (grid_player_x > grid_enemy_x && isValidMove(position.x + 20, position.y, grid)) {
-            new_x += 20;
+            if (grid_player_x < grid_enemy_x && isValidMove(position.x - 20, position.y, grid)) {
+                new_x -= 20;
+            } else if (grid_player_x > grid_enemy_x && isValidMove(position.x + 20, position.y, grid)) {
+                new_x += 20;
+            }
+
+            if (grid_player_y < grid_enemy_y && isValidMove(position.x, position.y - 20, grid)) {
+                new_y -= 20;
+            } else if (grid_player_y > grid_enemy_y && isValidMove(position.x, position.y + 20, grid)) {
+                new_y += 20;
+            }
+
+            if (isValidMove(new_x, new_y, grid)) { 
+                position.x = new_x;
+                position.y = new_y;
+                std::cout<<"enemy x pos: "<<this->getPosition().x<<" enemy y pos: "<<this->getPosition().y<<std::endl;
+            }
+
         }
-
-        if (grid_player_y < grid_enemy_y && isValidMove(position.x, position.y - 20, grid)) {
-            new_y -= 20;
-        } else if (grid_player_y > grid_enemy_y && isValidMove(position.x, position.y + 20, grid)) {
-            new_y += 20;
-        }
-
-        if (isValidMove(new_x, new_y, grid)) { 
-            position.x = new_x;
-            position.y = new_y;
-            std::cout<<"enemy x pos: "<<this->getPosition().x<<" enemy y pos: "<<this->getPosition().y<<std::endl;
-        }
-
     }
 }
 

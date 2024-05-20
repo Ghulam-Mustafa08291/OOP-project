@@ -30,6 +30,12 @@ void Player::updateKiBlasts(int grid[64][36], Enemy* enemy) {
     for (auto it = active_ki_blasts.begin(); it != active_ki_blasts.end();) {
         if ((*it)->check_weapon_collision_enemy(enemy) == true && (*it)->weapon_direction!="NULL") {
             (*it)->weapon_damage_enemy(enemy, grid);
+
+            (*it)->weapon_position.y = static_cast<int>((*it)->weapon_position_y);
+            (*it)->weapon_position.x = static_cast<int>((*it)->weapon_position_x);
+            int gridX = (*it)->weapon_position.x / BLOCK_SIZE;
+            int gridY = (*it)->weapon_position.y / BLOCK_SIZE;
+            grid[gridX][gridY] = 0;
             delete *it; // Free the memory
             std::cout<<"delted blast hehe, now imma remove from vector!"<<std::endl;
             it = active_ki_blasts.erase(it); // Remove the ki_blast if it goes out of bounds
