@@ -110,7 +110,7 @@ int main(int argc, char* args[]) {
     SDL_Texture* playerTexture = SDL_CreateTextureFromSurface(renderer, playerSurface);
     SDL_FreeSurface(playerSurface); // Free the surface as the texture is created
 
-
+    
     SDL_Texture* enemyTexture = SDL_CreateTextureFromSurface(renderer, enemySurface);
     SDL_FreeSurface(enemySurface); // Free the surface as the texture is created
     newEnemy->texture=enemyTexture;
