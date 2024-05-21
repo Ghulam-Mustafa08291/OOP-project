@@ -7,6 +7,7 @@
 #include "Plants.hpp"
 #include "enemy.hpp"
 #include "shooter.hpp"
+#include "coin.hpp"
 
 // int changeMap (int* g[64][36], int* m[64][36]) {
 //     for (int i = 0; i < 64; i++) {
@@ -26,6 +27,8 @@ int main(int argc, char* args[]) {
 
     Player player;
     Enemy* newEnemy = new Enemy(32,23);
+    
+    
 
     
     // Enemy enemy;
@@ -95,6 +98,9 @@ int main(int argc, char* args[]) {
       SDL_Surface* playerSurface = IMG_Load("temp_player.png");
       SDL_Surface* enemySurface = IMG_Load("temp_player.jpg");
       SDL_Surface* plantSurface = IMG_Load("sunflower.png");
+
+      SDL_Surface* coinsurface= IMG_Load("Gold_coin.png"); //for coin
+
       std::cout<<"hello player"<<std::endl;
     if (playerSurface == NULL) {
         printf("Unable to load player image! SDL_image Error: %s\n", IMG_GetError());
@@ -106,6 +112,8 @@ int main(int argc, char* args[]) {
         return 1;
     }
 
+    // SDL_Texture* cointexture=  SDL_CreateTextureFromSurface(renderer, coinsurface); //for coin
+    // SDL_FreeSurface(coinsurface); 
         // Create a texture from the player image surface
     SDL_Texture* playerTexture = SDL_CreateTextureFromSurface(renderer, playerSurface);
     SDL_FreeSurface(playerSurface); // Free the surface as the texture is created
@@ -215,7 +223,7 @@ int grid[64][36] =
 //         }
 //     }
 //     std::cout << std::endl;
-// }
+coin coin1(player, newEnemy, grid, renderer);// }
 
 int time = 0;
 
@@ -341,6 +349,12 @@ while (!quit) {
         // newEnemy->go_to_player(player,grid);
         SDL_Rect enemyRect= newEnemy->getPosition();
         SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
+
+
+        coin1.render(renderer);
+
+        // SDL_Rect coinrect1=coin1.coin_position;
+        // SDL_RenderCopy(renderer, cointexture, NULL, &coinrect1);
         // for (int i=0;i<enemies.size();i++) {
             
             // Update enemy logic (e.g., chasing the player)
@@ -403,6 +417,9 @@ while (!quit) {
     SDL_DestroyTexture(playerTexture);
     SDL_DestroyTexture(enemyTexture);
     SDL_DestroyTexture(plantTexture);
+
+    // SDL_DestroyTexture(cointexture);
+
 
     for (int i=0;i<PlantObject.size();i++) {
         delete PlantObject[i];
