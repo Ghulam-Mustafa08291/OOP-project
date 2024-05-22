@@ -8,6 +8,7 @@
 #include "enemy.hpp"
 #include "shooter.hpp"
 #include "coin.hpp"
+#include "EnemyBlast.hpp"
 
 // int changeMap (int* g[64][36], int* m[64][36]) {
 //     for (int i = 0; i < 64; i++) {
@@ -19,6 +20,8 @@
 // }
 
 std::vector<Enemy*> enemies;
+std::vector<EnemyBlast*> enemyBlasts; // To store the enemy blasts
+
 
 int initMixer = Mix_Init(0);
 
@@ -130,7 +133,6 @@ int main(int argc, char* args[]) {
 
 
 
-
    // Main loop flag
 bool quit = false;
 
@@ -224,6 +226,11 @@ int grid[64][36] =
 //     }
 //     std::cout << std::endl;
 coin coin1(player, newEnemy, grid, renderer);// }
+
+    EnemyBlast* enemyBlast = new EnemyBlast(grid, newEnemy, renderer);
+    enemyBlasts.push_back(enemyBlast);
+// EnemyBlast blast(grid,newEnemy,renderer);
+
 
 int time = 0;
 
@@ -355,6 +362,10 @@ while (!quit) {
 
 
         coin1.render(renderer);
+        // blast.render(renderer);
+        for (auto& blast : enemyBlasts) {
+            blast->render(renderer);
+        }
 
         // SDL_Rect coinrect1=coin1.coin_position;
         // SDL_RenderCopy(renderer, cointexture, NULL, &coinrect1);
