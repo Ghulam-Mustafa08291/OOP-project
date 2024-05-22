@@ -266,6 +266,9 @@ while (!quit) {
         time++;
         player.move(e, grid); // Assuming the player continuously moves once the game starts
         player.updateKiBlasts(grid,newEnemy);
+        if(coin1.check_coint_collision_with_player(player)==true){
+            coin1.player_colllect_coin(player);
+        }
         
         for (int i = 0; i < 64; ++i) {
             for (int j = 0; j < 36; ++j) {

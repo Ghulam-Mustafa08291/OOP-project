@@ -5,6 +5,8 @@
 #include "enemy.hpp"
 #include <iostream>
 
+// class Player;
+
 class coin{
     public:
         SDL_Rect coin_position;
@@ -13,6 +15,10 @@ class coin{
         ~coin();
         int generate_random_cordinates(int min,int max);
         void render(SDL_Renderer* renderer);
+        bool check_coint_collision_with_player(Player& pl);
+        void player_colllect_coin(Player& pl);
+        void kill_coin();
+        bool collected;
 
 
 };

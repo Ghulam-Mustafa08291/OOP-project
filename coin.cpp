@@ -10,6 +10,8 @@ int coin::generate_random_cordinates(int min, int max) {
 }
 
 coin::coin(Player& player, Enemy* newEnemy,int grid[64][36],SDL_Renderer* renderer){
+
+    this->collected=false;
     int coinX=0;
     int coinY=0;
 
@@ -50,6 +52,43 @@ coin::~coin() {
     if (coin_texture) {
         SDL_DestroyTexture(coin_texture);
     }
-    std::cout << "coin destroyed" << std::endl;
+    std::
+    cout << "coin destroyed" << std::endl;
 }
+
+bool coin::check_coint_collision_with_player(Player& player){
+    int coinX=coin_position.x/20;
+    int coinY=coin_position.y/20;
+
+     int playerX=player.getPosition().x/20;
+    int playerY=player.getPosition().y/20;
+
+    if(coinX==playerX && coinY==playerY){
+        // std::cout<<"player and coin collided"<<std::endl;
+    
+        return true;
+        
+    }
+    else{
+        return false;
+    }
+}
+
+void coin::kill_coin(){
+    SDL_DestroyTexture(this->coin_texture);
+    std::cout<<"in kill coin function, i deleted the texture"<<std::endl;
+}
+
+
+void coin::player_colllect_coin(Player& player){
+    if(collected==false){
+        player.setGold(player.getGold()+1);
+        std::cout<<"new player gold is:"<<player.getGold()<<std::endl;
+        kill_coin();
+        collected=true;
+    }
+   
+}
+
+
 
