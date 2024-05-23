@@ -103,7 +103,7 @@ void Enemy::deal_damage(Player& p){
 
 void Enemy::go_to_player(Player& p, int grid[64][36],SDL_Renderer* renderer) {
     if(total_time_passed%blast_create_max_time==0){
-        std::cout<<"entered the if condition for enemyblast creation in enemy class, gotoplayer function"<<std::endl;
+        // std::cout<<"entered the if condition for enemyblast creation in enemy class, gotoplayer function"<<std::endl;
         EnemyBlast* blast=new EnemyBlast(grid,this,renderer);
         blast->blast_x=static_cast<float>(blast->enemy_blast_position.x);
         blast->blast_y=static_cast<float>(blast->enemy_blast_position.y);
@@ -224,7 +224,7 @@ Enemy::Enemy(int i, int j)
 :health{100},speed{1},damage{5},position{i*20,j*20,20,20}
 {
      blast_creation_speed=0.1f;
-    blast_create_max_time=2;
+    blast_create_max_time=200;
     total_time_passed=0.1f;
 }
 
