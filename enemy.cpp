@@ -105,6 +105,8 @@ void Enemy::go_to_player(Player& p, int grid[64][36],SDL_Renderer* renderer) {
     if(total_time_passed%blast_create_max_time==0){
         std::cout<<"entered the if condition for enemyblast creation in enemy class, gotoplayer function"<<std::endl;
         EnemyBlast* blast=new EnemyBlast(grid,this,renderer);
+        blast->blast_x=static_cast<float>(blast->enemy_blast_position.x);
+        blast->blast_y=static_cast<float>(blast->enemy_blast_position.y);
         this->enemyBlasts.push_back(blast);
     }
     total_time_passed=total_time_passed+blast_creation_speed;

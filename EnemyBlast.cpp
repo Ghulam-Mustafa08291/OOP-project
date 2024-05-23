@@ -54,24 +54,25 @@ void EnemyBlast::go_to_player(Player& player, int grid[64][36]) {
     int enemyblast_x = enemy_blast_position.x / 20;
     int enemyblast_y = enemy_blast_position.y / 20;
 
-    int new_x = enemy_blast_position.x;
-    int new_y = enemy_blast_position.y;
+    float new_x = 0;
+    float new_y = 0;
 
     if (enemyblast_x != grid_player_x || enemyblast_y != grid_player_y) {
-        if (grid_player_x < enemyblast_x && isValidMove(enemy_blast_position.x - 20, enemy_blast_position.y, grid)) {
-            new_x -= 20;
-        } else if (grid_player_x > enemyblast_x && isValidMove(enemy_blast_position.x + 20, enemy_blast_position.y, grid)) {
-            new_x += 20;
+        if (grid_player_x < enemyblast_x ) {
+            new_x =- 0.1f;
+        } else if (grid_player_x > enemyblast_x) {
+            new_x = 0.1f;
         }
 
-        if (grid_player_y < enemyblast_y && isValidMove(enemy_blast_position.x, enemy_blast_position.y - 20, grid)) {
-            new_y -= 20;
-        } else if (grid_player_y > enemyblast_y && isValidMove(enemy_blast_position.x, enemy_blast_position.y + 20, grid)) {
-            new_y += 20;
+        if (grid_player_y < enemyblast_y ) {
+            new_y =- 0.1f;
+        } else if (grid_player_y > enemyblast_y) {
+            new_y = 0.1f;
         }
-
-        enemy_blast_position.x = new_x;
-        enemy_blast_position.y = new_y;
+        blast_x+=new_x;
+        blast_y+=new_y;
+        enemy_blast_position.x = static_cast<int>(blast_x);
+        enemy_blast_position.y = static_cast<int>(blast_y);
     }
 }
 

@@ -16,6 +16,8 @@ public:
 
     EnemyBlast(int grid[64][36], Enemy* enemy, SDL_Renderer* renderer);
     ~EnemyBlast();
+    float blast_x;
+    float blast_y;
 
     bool isValidMove(int x, int y, int grid[64][36]);
     void go_to_player(Player& player, int grid[64][36]);
