@@ -6,19 +6,20 @@
 #include <iostream>
 #include "enemy.hpp"
 
+class Player;
+class Enemy;
 
-class EnemyBlast{
-    public:
-        SDL_Rect enemy_blast_position;
-        SDL_Texture* enemy_blast_texture;
-        void go_to_player(Player& player);
-        void render(SDL_Renderer* renderer);
+class EnemyBlast {
+public:
+    SDL_Rect enemy_blast_position;
+    SDL_Texture* enemy_blast_texture;
 
-        EnemyBlast(int grid[64][36],Enemy* enen,SDL_Renderer* renderer);
-        ~EnemyBlast();
+    EnemyBlast(int grid[64][36], Enemy* enemy, SDL_Renderer* renderer);
+    ~EnemyBlast();
+
+    bool isValidMove(int x, int y, int grid[64][36]);
+    void go_to_player(Player& player, int grid[64][36]);
+    void render(SDL_Renderer* renderer);
 };
 
-
-
-
-#endif // ENEMY_HPP
+#endif // ENEMYBLAST_HPP

@@ -101,7 +101,13 @@ void Enemy::deal_damage(Player& p){
 }
 
 
-void Enemy::go_to_player(Player& p, int grid[64][36]) {
+void Enemy::go_to_player(Player& p, int grid[64][36],SDL_Renderer* renderer) {
+    if(total_time_passed%blast_create_max_time==0){
+        std::cout<<"entered the if condition for enemyblast creation in enemy class, gotoplayer function"<<std::endl;
+        EnemyBlast* blast=new EnemyBlast(grid,this,renderer);
+        this->enemyBlasts.push_back(blast);
+    }
+    total_time_passed=total_time_passed+blast_creation_speed;
     if(this->getHealth()>0){
         int grid_player_x = p.getPosition().x / 20;
         int grid_player_y = p.getPosition().y / 20;
@@ -137,41 +143,44 @@ void Enemy::go_to_player(Player& p, int grid[64][36]) {
     }
 }
 
-void Enemy::update(Player& p, int grid[64][36], Plants& pl) {
-    if (this->getPosition() == p.getPosition()) {
-        this->deal_damage(p);
-    } else {
+// void Enemy::update(Player& p, int grid[64][36], Plants& pl) {
+//     // if(total_time_passed%blast_create_max_time==0){
+//     //     EnemyBlast* blast=new EnemyBlast(grid,this,)
+//     // }
+//     if (this->getPosition() == p.getPosition()) {
+//         this->deal_damage(p);
+//     } else {
 
-        if((*this==pl)==false){ //if the positions do not match then check for collision with the plants
-            if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y-20){
-                this->deal_damage(pl);
-            }
+//         if((*this==pl)==false){ //if the positions do not match then check for collision with the plants
+//             if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y-20){
+//                 this->deal_damage(pl);
+//             }
 
-            if(pl.getPosition().x==this->getPosition().x+20 && pl.getPosition().y==this->getPosition().y){
-                this->deal_damage(pl);
-            }
+//             if(pl.getPosition().x==this->getPosition().x+20 && pl.getPosition().y==this->getPosition().y){
+//                 this->deal_damage(pl);
+//             }
 
-            if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y+20){
-                this->deal_damage(pl);
-            }
+//             if(pl.getPosition().x==this->getPosition().x && pl.getPosition().y==this->getPosition().y+20){
+//                 this->deal_damage(pl);
+//             }
 
-            if(pl.getPosition().x==this->getPosition().x-20 && pl.getPosition().y==this->getPosition().y){
-                this->deal_damage(pl);
-            }
+//             if(pl.getPosition().x==this->getPosition().x-20 && pl.getPosition().y==this->getPosition().y){
+//                 this->deal_damage(pl);
+//             }
 
 
-        }
-        go_to_player(p, grid);
-    }
-}
+//         }
+//         go_to_player(p, grid);
+//     }
+// }
 
-void Enemy::update(Player& p, int grid[64][36]) {
-    if (position == p.getPosition()) {
-        this->deal_damage(p);
-    } else {
-        go_to_player(p, grid);
-    }
-}
+// void Enemy::update(Player& p, int grid[64][36]) {
+//     if (position == p.getPosition()) {
+//         this->deal_damage(p);
+//     } else {
+//         go_to_player(p, grid);
+//     }
+// }
 
 
 
@@ -203,10 +212,18 @@ bool Enemy::isValidMove(int x, int y, int grid[64][36]) {
 ////////////////////////////////
 Enemy::Enemy()
 :health{100},speed{1},damage{10},position{1240,60,20,20} 
-{}
+{
+    blast_creation_speed=0.1f;
+    blast_create_max_time=2;
+    total_time_passed=0.1f;
+}
 
 Enemy::Enemy(int i, int j)
 :health{100},speed{1},damage{5},position{i*20,j*20,20,20}
-{}
+{
+     blast_creation_speed=0.1f;
+    blast_create_max_time=2;
+    total_time_passed=0.1f;
+}
 
 Enemy::~Enemy(){}

@@ -10,17 +10,10 @@
 #include "coin.hpp"
 #include "EnemyBlast.hpp"
 
-// int changeMap (int* g[64][36], int* m[64][36]) {
-//     for (int i = 0; i < 64; i++) {
-//         for (int j = 0; j < 36; j++) {
-//             g[i][j] = m[i][j];
-//         }
-//     }
-//     return 0;
-// }
+
 
 std::vector<Enemy*> enemies;
-std::vector<EnemyBlast*> enemyBlasts; // To store the enemy blasts
+// std::vector<EnemyBlast*> enemyBlasts; // To store the enemy blasts
 
 
 int initMixer = Mix_Init(0);
@@ -227,8 +220,8 @@ int grid[64][36] =
 //     std::cout << std::endl;
 coin coin1(player, newEnemy, grid, renderer);// }
 
-    EnemyBlast* enemyBlast = new EnemyBlast(grid, newEnemy, renderer);
-    enemyBlasts.push_back(enemyBlast);
+    // EnemyBlast* enemyBlast = new EnemyBlast(grid, newEnemy, renderer);
+    // enemyBlasts.push_back(enemyBlast);
 // EnemyBlast blast(grid,newEnemy,renderer);
 
 
@@ -306,7 +299,7 @@ while (!quit) {
                         // // Create a new enemy on the heap
                         // Enemy* newEnemy = new Enemy(i, j);
                         // //time=0;
-                        newEnemy->go_to_player(player,grid);
+                        newEnemy->go_to_player(player,grid,renderer);
                         // // Add the new enemy to the vector
                         // enemies.push_back(newEnemy);
                     }
@@ -332,26 +325,7 @@ while (!quit) {
             }
         }
 
-        // for (int i = 0; i < 64; i++) {
-        //     for (int j = 0; j < 36; j++) {
-        //         if (grid[i][j] == 1) {
-        //             std::cout << "1";
-        //         }
-        //         else if (grid[i][j] == 0) {
-        //             std::cout << "0";
-        //         }
-        //         else if (grid[i][j] == 2) {
-        //             std::cout << "2";
-        //         }
-        //         else if (grid[i][j] == 3) {
-        //             std::cout << "3";
-        //         }
-        //         else if (grid[i][j] == 4) {
-        //             std::cout << "4";
-        //         }
-        //     }
-        //     std::cout << std::endl;
-        // }
+        
 
         // std::cout << std::endl << std::endl << std::endl << std::endl;
 
@@ -363,52 +337,12 @@ while (!quit) {
 
         coin1.render(renderer);
         // blast.render(renderer);
-        for (auto& blast : enemyBlasts) {
-            blast->render(renderer);
-        }
+        for (EnemyBlast* blast : newEnemy->enemyBlasts) {
+                blast->go_to_player(player, grid);
+                blast->render(renderer);
+            }
 
-        // SDL_Rect coinrect1=coin1.coin_position;
-        // SDL_RenderCopy(renderer, cointexture, NULL, &coinrect1);
-        // for (int i=0;i<enemies.size();i++) {
-            
-            // Update enemy logic (e.g., chasing the player)
-            // // For now, assuming a simple update function in the Enemy class
-            // if(i<PlantObject.size()){
-            // SDL_Rect plantRect= PlantObject[i]->getPosition();
-            // SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-            // enemies[i]->update(player,grid,*PlantObject[i]);
-            // }
-            // else{
-            //     enemies[i]->go_to_player(player,grid);
-            // }
-            
-           
-
-            // Render enemy on the grid
-            // For now, assuming a simple render function in the Enemy class
-            
-        // }
-
-        // for (int i=0;i<PlantObject.size();i++) {
-        //     // Render plant on the grid
-        //     // For now, assuming a simple render function in the Plant class
-        //     SDL_Rect plantRect= PlantObject[i]->getPosition();
-        //     SDL_RenderCopy(renderer, plantTexture, NULL, &plantRect);
-        //     newEnemy->update(player,grid,*PlantObject[i]);
-        // }
-
-
-        // for (int i=0;i<enemies.size();i++) {
-        //     // Update enemy logic (e.g., chasing the player)
-        //     // For now, assuming a simple update function in the Enemy class
-        //     enemies[i]->update(player,grid);
-
-        //     // Render enemy on the grid
-        //     // For now, assuming a simple render function in the Enemy class
-        //     SDL_Rect enemyRect= enemies[i]->getPosition();
-        //     SDL_RenderCopy(renderer, enemyTexture, NULL, &enemyRect);
-        // }
-
+        
         SDL_Rect playerRect = player.getPosition();
         // SDL_Rect enemyRect= enemy.getPosition();
         SDL_RenderCopy(renderer, playerTexture, NULL, &playerRect);
