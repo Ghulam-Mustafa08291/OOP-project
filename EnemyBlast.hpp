@@ -13,7 +13,11 @@ class EnemyBlast {
 public:
     SDL_Rect enemy_blast_position;
     SDL_Texture* enemy_blast_texture;
-
+    int damage;
+    bool collided;
+    void damage_player(Player& p);
+    void kill_enemyblast();
+    bool collided_with_player(Player& p);
     EnemyBlast(int grid[64][36], Enemy* enemy, SDL_Renderer* renderer);
     ~EnemyBlast();
     float blast_x;

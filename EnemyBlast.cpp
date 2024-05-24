@@ -2,11 +2,13 @@
 #include "player.hpp"
 
 EnemyBlast::EnemyBlast(int grid[64][36], Enemy* newEnemy, SDL_Renderer* renderer) {
-    std::cout<<"eneterd the enemyblast constructor"<<std::endl;
+    // std::cout<<"eneterd the enemyblast constructor"<<std::endl;
     enemy_blast_position.x = newEnemy->getPosition().x; // Start at enemy's position
     enemy_blast_position.y = newEnemy->getPosition().y;
     enemy_blast_position.w = 20;
     enemy_blast_position.h = 20;
+    damage=10;
+    collided=false;
 
     SDL_Surface* EnemyBlast_Surface = IMG_Load("fireball.png");
     if (EnemyBlast_Surface == nullptr) {
@@ -48,6 +50,9 @@ bool EnemyBlast::isValidMove(int x, int y, int grid[64][36]) {
 }
 
 void EnemyBlast::go_to_player(Player& player, int grid[64][36]) {
+    if(collided_with_player(player)==true && collided==true){
+        damage_player(player);
+    }
     int grid_player_x = player.getPosition().x / 20;
     int grid_player_y = player.getPosition().y / 20;
 
@@ -78,4 +83,34 @@ void EnemyBlast::go_to_player(Player& player, int grid[64][36]) {
 
 void EnemyBlast::render(SDL_Renderer* renderer) {
     SDL_RenderCopy(renderer, enemy_blast_texture, nullptr, &enemy_blast_position);
+}
+
+
+void EnemyBlast::kill_enemyblast(){
+    SDL_DestroyTexture(this->enemy_blast_texture);
+
+}
+bool EnemyBlast::collided_with_player(Player& player){
+    int grid_player_x = player.getPosition().x / 20;
+    int grid_player_y = player.getPosition().y / 20;
+
+    int grid_enemyblast_x=enemy_blast_position.x/20;
+    int grid_enemyblast_y=enemy_blast_position.y/20;
+    std::cout<<"grid_player_x:"<<grid_player_x<<", grid_player_y:"<<grid_player_y<<" ,grid_enemyblast_x: "<<grid_enemyblast_x<<" ,grid_enemyblast_y: "<<grid_enemyblast_y<<std::endl;
+    if(grid_enemyblast_x==grid_player_x && grid_enemyblast_y==grid_player_y){
+        std::cout<<"enemy blast collided with the player!"<<std::endl;
+        collided=true;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void EnemyBlast::damage_player(Player& player){
+    
+    player.setHealth(player.getHealth()-damage);
+    collided=false;
+    kill_enemyblast();
+    std::cout<<"player damaged, new player health: "<<player.getHealth()<<std::endl; 
 }
