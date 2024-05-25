@@ -42,9 +42,10 @@ bool EnemyBlast::isValidMove(int x, int y, int grid[64][36]) {
     int cellX = x / 20;
     int cellY = y / 20;
 
-    if (grid[cellX][cellY] == 1 || grid[cellX][cellY] == 3) {
-        return false; // Collides with a wall
-    }
+    // if (grid[cellX][cellY] == 1 || grid[cellX][cellY] == 3) {
+    //      // Collides with a wall
+    //      grid[cellX][cellY] = 0; 
+    // }
 
     return true; // Position is valid
 }
@@ -78,6 +79,10 @@ void EnemyBlast::go_to_player(Player& player, int grid[64][36]) {
         blast_y+=new_y;
         enemy_blast_position.x = static_cast<int>(blast_x);
         enemy_blast_position.y = static_cast<int>(blast_y);
+        if(grid[enemyblast_x][enemyblast_y]==1){
+            grid[enemyblast_x][enemyblast_y]=0;
+        }
+        
     }
 }
 
