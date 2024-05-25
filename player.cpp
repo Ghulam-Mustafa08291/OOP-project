@@ -270,6 +270,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
             // Check the key pressed
             switch (event.key.keysym.sym) {
                 case SDLK_z:
+                if(gold==1){
                     if (direction_facing == "down") {
                         Weapons* ki_blast = new Weapons; // Dynamic allocation  
                         ki_blast->weapon_position.x = currentX;
@@ -323,7 +324,7 @@ void Player::move(SDL_Event& event, int grid[64][36]) {
                         active_ki_blasts.push_back(ki_blast);
                     }
                     break;
-
+                }
                 case SDLK_UP:
                     // Check if the grid position above the player is not blocked
                     if (gridY - 1 >= 0 && grid[gridX][gridY - 1] != 1) {
