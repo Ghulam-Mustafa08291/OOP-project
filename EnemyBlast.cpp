@@ -10,7 +10,7 @@ EnemyBlast::EnemyBlast(int grid[64][36], Enemy* newEnemy, SDL_Renderer* renderer
     damage=10;
     collided=false;
 
-    SDL_Surface* EnemyBlast_Surface = IMG_Load("fireball.png");
+    SDL_Surface* EnemyBlast_Surface = IMG_Load("bluefireball.png");
     if (EnemyBlast_Surface == nullptr) {
         std::cout << "Unable to load fireball image! SDL_image Error: " << IMG_GetError() << std::endl;
         return;

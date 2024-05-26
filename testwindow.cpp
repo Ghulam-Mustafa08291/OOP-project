@@ -92,7 +92,7 @@ int main(int argc, char* args[]) {
 
 
       SDL_Surface* playerSurface = IMG_Load("temp_player.png");
-      SDL_Surface* enemySurface = IMG_Load("temp_player.jpg");
+      SDL_Surface* enemySurface = IMG_Load("gunenemy.png");
       SDL_Surface* plantSurface = IMG_Load("sunflower.png");
 
       SDL_Surface* coinsurface= IMG_Load("Gold_coin.png"); //for coin
