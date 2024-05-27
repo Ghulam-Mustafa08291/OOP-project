@@ -18,6 +18,8 @@ private:
     SDL_Rect position;
 
 public:
+    float enemy_x;
+    float enemy_y;
     int blast_creation_speed;
     int blast_create_max_time;
     int total_time_passed;

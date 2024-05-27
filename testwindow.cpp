@@ -91,7 +91,7 @@ int main(int argc, char* args[]) {
 
 
 
-      SDL_Surface* playerSurface = IMG_Load("temp_player.png");
+      SDL_Surface* playerSurface = IMG_Load("gunplayer.png");
       SDL_Surface* enemySurface = IMG_Load("gunenemy.png");
       SDL_Surface* plantSurface = IMG_Load("sunflower.png");
 
@@ -295,7 +295,7 @@ while (!quit) {
                     // }
 
                     // Create a new enemy every 100 ticks
-                    if (time % 1000 == 0) {
+                    if (time % 500 == 0) {
                         // // Create a new enemy on the heap
                         // Enemy* newEnemy = new Enemy(i, j);
                         // //time=0;

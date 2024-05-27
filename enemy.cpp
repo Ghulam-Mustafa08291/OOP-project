@@ -117,8 +117,8 @@ void Enemy::go_to_player(Player& p, int grid[64][36],SDL_Renderer* renderer) {
         int grid_enemy_x = position.x / 20;
         int grid_enemy_y = position.y / 20;
 
-        int new_x = position.x;  
-        int new_y = position.y;  
+        float new_x = position.x;  
+        float new_y = position.y;  
         if((*this==p)==false){
 
             
